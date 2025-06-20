@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Sistema de Login{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{% block title %}Sistema de Login{% endblock %} | CidadeFiscal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">Ï
 </head>
 <body>
     <header>
         <nav>
-            <a href="{{ url_for('index') }}" class="logo">Meu App</a>
+            <a href="{{ url_for('index') }}" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                CidadeFiscal
+            </a>
             <ul>
                 {% if 'username' in session %}
-                    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{ url_for('dashboard') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="{{ url_for('report_issue') }}"><i class="fas fa-exclamation-circle"></i> Reportar</a></li>
+                    <li><a href="{{ url_for('my_reports') }}"><i class="fas fa-list"></i> Minhas Ocorrências</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="btn-nav"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
                 {% else %}
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
-                    <li><a href="{{ url_for('signup') }}">Cadastre-se</a></li>
+                    <li><a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="{{ url_for('signup') }}" class="btn-nav"><i class="fas fa-user-plus"></i> Cadastre-se</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -33,11 +40,80 @@
             {% endif %}
         {% endwith %}
 
-        {% block content %}{% endblock %}
+        {% block content %}
+        <div class="home-header">
+            <h1>Transformando nossa cidade juntos</h1>
+            <p>Use o CidadeFiscal para reportar problemas urbanos e acompanhar a resolução pelo poder público.</p>
+        </div>
+
+        <div class="content-box">
+            <h1>Bem-vindo ao CidadeFiscal</h1>
+            <p>Esta plataforma conecta cidadãos ao poder público para identificar e resolver problemas urbanos e rurais que afetam a segurança e qualidade de vida.</p>
+
+            {% if 'username' not in session %}
+            <p>Faça <a href="{{ url_for('login') }}">login</a> ou <a href="{{ url_for('signup') }}">crie uma conta</a> para começar a reportar ocorrências.</p>
+            {% else %}
+            <p>Você está logado como <strong>{{ session['username'] }}</strong>.</p>
+            <p>Acesse seu <a href="{{ url_for('dashboard') }}">dashboard</a> ou <a href="{{ url_for('report_issue') }}">reporte uma nova ocorrência</a>.</p>
+            {% endif %}
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Georreferenciamento</h3>
+                <p>Localize e acompanhe ocorrências em tempo real com mapas interativos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>IA para Classificação</h3>
+                <p>Classificação automática e direcionamento para o órgão responsável.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Análise Preditiva</h3>
+                <p>Prevenção de problemas com análise de padrões e tendências.</p>
+            </div>
+        </div>
+        {% endblock %}
     </main>
 
     <footer>
-        <p>&copy; 2025 - Solução de Exemplo</p>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3><i class="fas fa-shield-alt"></i> CidadeFiscal</h3>
+                <p>Plataforma inteligente para mapear, classificar e tratar desordens urbanas com participação cidadã.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-links-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="{{ url_for('index') }}">Início</a></li>
+                        <li><a href="#">Sobre</a></li>
+                        <li><a href="#">Como Funciona</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Parceiros</h4>
+                    <ul>
+                        <li><a href="#">Segurança Pública</a></li>
+                        <li><a href="#">Infraestrutura</a></li>
+                        <li><a href="#">Defesa Civil</a></li>
+                        <li><a href="#">Meio Ambiente</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CidadeFiscal - Todos os direitos reservados</p>
+        </div>
     </footer>
 </body>
 </html>
