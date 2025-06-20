@@ -9,7 +9,7 @@
     </div>
     <h2>Entrar na sua conta</h2>
 
-    <form method="POST" action="{{ url_for('login') }}">
+    <form method="POST" action="{{ url_for('auth.login') }}">
         <div class="form-group">
             <label for="username">Usuário ou Email</label>
             <div class="input-with-icon">
@@ -51,7 +51,7 @@
     </div>
 
     <div class="form-link">
-        Não tem uma conta? <a href="{{ url_for('signup') }}">Cadastre-se</a>
+        Não tem uma conta? <a href="{{ url_for('auth.signup') }}">Cadastre-se</a>
     </div>
 </div>
 

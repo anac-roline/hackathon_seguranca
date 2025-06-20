@@ -23,7 +23,7 @@ def dashboard():
     """Painel de controle, acessível apenas para usuários logados."""
     if 'user_id' not in session:
         flash('Você precisa estar logado para acessar esta página.', 'error')
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
     return render_template('dashboard.html')
 

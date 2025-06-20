@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav>
-            <a href="{{ url_for('index') }}" class="logo">
+            <a href="{{ url_for('main.index') }}" class="logo">
                 <i class="fas fa-shield-alt"></i>
                 CidadeFiscal
             </a>
@@ -20,10 +20,10 @@
                     <li><a href="{{ url_for('main.dashboard') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
 {#                    <li><a href="{{ url_for('main.report_issue') }}"><i class="fas fa-exclamation-circle"></i> Reportar</a></li>#}
 {#                    <li><a href="{{ url_for('main.my_reports') }}"><i class="fas fa-list"></i> Minhas Ocorrências</a></li>#}
-{#                    <li><a href="{{ url_for('logout') }}" class="btn-nav"><i class="fas fa-sign-out-alt"></i> Sair</a></li>#}
+{#                    <li><a href="{{ url_for('auth.logout') }}" class="btn-nav"><i class="fas fa-sign-out-alt"></i> Sair</a></li>#}
                 {% else %}
-                    <li><a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-                    <li><a href="{{ url_for('signup') }}" class="btn-nav"><i class="fas fa-user-plus"></i> Cadastre-se</a></li>
+                    <li><a href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="{{ url_for('auth.signup') }}" class="btn-nav"><i class="fas fa-user-plus"></i> Cadastre-se</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -94,7 +94,7 @@
                 <div class="footer-links-col">
                     <h4>Navegação</h4>
                     <ul>
-                        <li><a href="{{ url_for('index') }}">Início</a></li>
+                        <li><a href="{{ url_for('main.index') }}">Início</a></li>
                         <li><a href="#">Sobre</a></li>
                         <li><a href="#">Como Funciona</a></li>
                         <li><a href="#">Contato</a></li>
