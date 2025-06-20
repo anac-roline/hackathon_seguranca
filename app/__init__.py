@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
+import os
 
 # Inicializa a extensão
 db = SQLAlchemy()
@@ -18,6 +19,9 @@ from app.routes.auth import auth_bp
 
 app.register_blueprint(main_bp)
 app.register_blueprint(auth_bp)
+
+# Definir pasta de uploads
+app.static_folder = os.path.join(os.path.dirname(__file__), 'static')
 
 # Cria o banco de dados e as tabelas se não existirem
 with app.app_context():
