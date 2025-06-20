@@ -18,22 +18,22 @@
 <div class="stats-row">
     <div class="stat-card">
         <i class="fas fa-file-alt stat-icon"></i>
-        <div class="stat-value">3</div>
+        <div class="stat-value">{{stats.get("ocorrencias_reportadas", 0)}}</div>
         <div class="stat-label">Ocorrências Reportadas</div>
     </div>
     <div class="stat-card">
         <i class="fas fa-check-circle stat-icon"></i>
-        <div class="stat-value">1</div>
+        <div class="stat-value">{{stats.get("ocorrencias_resolvidas", 0)}}</div>
         <div class="stat-label">Resolvidas</div>
     </div>
     <div class="stat-card">
         <i class="fas fa-clock stat-icon"></i>
-        <div class="stat-value">2</div>
+        <div class="stat-value">{{stats.get("ocorrencias_em_andamento", 0)}}</div>
         <div class="stat-label">Em Andamento</div>
     </div>
     <div class="stat-card">
         <i class="fas fa-thumbs-up stat-icon"></i>
-        <div class="stat-value">5</div>
+        <div class="stat-value">{{stats.get("impacto_social", 0)}}</div>
         <div class="stat-label">Impacto Social</div>
     </div>
 </div>

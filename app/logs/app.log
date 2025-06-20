@@ -81,3 +81,23 @@
 2025-06-20 16:37:18,369 [INFO] - Análise de IA concluída para CDF-2506-0010: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["buraco grande", "deteriora\u00e7\u00e3o significativa do asfalto"], "analysis": "A imagem mostra um grande buraco em uma estrada com significativo afundamento do asfalto, o que representa um problema s\u00e9rio para a via p\u00fablica.", "needs_human_review": true, "category_id": 1, "threshold": 0.7, "needs_review": true}
 2025-06-20 16:37:18,369 [WARNING] - Ocorrência CDF-2506-0010 marcada para revisão humana
 2025-06-20 16:37:18,376 [INFO] - Ocorrência CDF-2506-0010 salva com sucesso no banco de dados
+2025-06-20 17:34:04,192 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 17:34:04,202 [INFO] - Código gerado: CDF-2506-0011
+2025-06-20 17:34:04,202 [INFO] - Processando foto: TCL.jpg
+2025-06-20 17:34:04,203 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0011.jpg
+2025-06-20 17:34:04,203 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0011
+2025-06-20 17:34:04,204 [ERROR] - Falha na análise de imagem: 1 validation error for Settings
+OPENAPI_API_KEY
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-06-20 17:34:04,223 [INFO] - Ocorrência CDF-2506-0011 salva com sucesso no banco de dados
+2025-06-20 18:24:51,347 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 18:24:51,353 [INFO] - Código gerado: CDF-2506-0012
+2025-06-20 18:24:51,353 [INFO] - Processando foto: eu.jpg
+2025-06-20 18:24:51,353 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0012.jpg
+2025-06-20 18:24:51,353 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0012
+2025-06-20 18:24:51,355 [ERROR] - Falha na análise de imagem: 1 validation error for Settings
+OPENAPI_API_KEY
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-06-20 18:24:51,371 [INFO] - Ocorrência CDF-2506-0012 salva com sucesso no banco de dados
