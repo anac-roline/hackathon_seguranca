@@ -14,7 +14,7 @@ def dashboard():
     """Painel de controle, acessível apenas para usuários logados."""
     if 'user_id' not in session:
         flash('Você precisa estar logado para acessar esta página.', 'error')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('login'))
 
     return render_template('dashboard.html')
 
@@ -23,7 +23,7 @@ def report_issue():
     """Página para reportar uma nova ocorrência."""
     if 'user_id' not in session:
         flash('Você precisa estar logado para acessar esta página.', 'error')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('login'))
 
     if request.method == 'POST':
         # Lógica para processar o formulário de reporte de ocorrência

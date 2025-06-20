@@ -16,7 +16,7 @@ def signup():
         # Verifica se o usuário já existe
         if User.query.filter_by(username=username).first():
             flash('Este nome de usuário já existe. Tente outro.', 'error')
-            return redirect(url_for('auth.signup'))
+            return redirect(url_for('signup'))
 
         # Cria um novo usuário com senha hasheada
         new_user = User(
@@ -27,7 +27,7 @@ def signup():
         db.session.commit()
 
         flash('Conta criada com sucesso! Faça o login.', 'success')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('login'))
 
     return render_template('signup.html')
 
@@ -52,7 +52,7 @@ def login():
             return redirect(url_for('main.dashboard'))
 
         flash('Credenciais inválidas. Verifique seu usuário e senha.', 'error')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('login'))
 
     return render_template('login.html')
 
@@ -63,4 +63,4 @@ def logout():
     session.pop('user_id', None)
     session.pop('username', None)
     flash('Você foi desconectado.', 'info')
-    return redirect(url_for('main.index'))
+    return redirect(url_for('index'))

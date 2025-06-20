@@ -5,7 +5,7 @@
 {% block content %}
     <div class="form-container">
         <h2>Criar Nova Conta</h2>
-        <form method="POST" action="{{ url_for('auth.signup') }}">
+        <form method="POST" action="{{ url_for('signup') }}">
             <div class="form-group">
                 <label for="username">Nome de Usuário</label>
                 <input type="text" id="username" name="username" required>
@@ -16,6 +16,6 @@
             </div>
             <button type="submit" class="btn">Cadastrar</button>
         </form>
-        <p class="form-link">Já tem uma conta? <a href="{{ url_for('auth.login') }}">Faça login</a></p>
+        <p class="form-link">Já tem uma conta? <a href="{{ url_for('login') }}">Faça login</a></p>
     </div>
 {% endblock %}

@@ -13,7 +13,7 @@
     <p>Esta plataforma conecta cidadãos ao poder público para identificar e resolver problemas urbanos e rurais que afetam a segurança e qualidade de vida.</p>
     
     {% if 'username' not in session %}
-    <p>Faça <a href="{{ url_for('auth.login') }}">login</a> ou <a href="{{ url_for('auth.signup') }}">crie uma conta</a> para começar a reportar ocorrências.</p>
+    <p>Faça <a href="{{ url_for('login') }}">login</a> ou <a href="{{ url_for('signup') }}">crie uma conta</a> para começar a reportar ocorrências.</p>
     {% else %}
     <p>Você está logado como <strong>{{ session['username'] }}</strong>.</p>
     <p>Acesse seu <a href="{{ url_for('main.dashboard') }}">dashboard</a> ou <a href="{{ url_for('main.report_issue') }}">reporte uma nova ocorrência</a>.</p>
