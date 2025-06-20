@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Sistema de Login{% endblock %} | CidadeFiscal</title>
+    <title>{% block title %}Sistema de Login{% endblock %} | VigiaDF</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">Ï
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <header>
         <nav>
             <a href="{{ url_for('main.index') }}" class="logo">
                 <i class="fas fa-shield-alt"></i>
-                CidadeFiscal
+                VigiaDF
             </a>
             <ul>
                 {% if 'username' in session %}
@@ -43,11 +43,11 @@
         {% block content %}
         <div class="home-header">
             <h1>Transformando nossa cidade juntos</h1>
-            <p>Use o CidadeFiscal para reportar problemas urbanos e acompanhar a resolução pelo poder público.</p>
+            <p>Use o VigiaDF para reportar problemas urbanos e acompanhar a resolução pelo poder público.</p>
         </div>
 
         <div class="content-box">
-            <h1>Bem-vindo ao CidadeFiscal</h1>
+            <h1>Bem-vindo ao VigiaDF</h1>
             <p>Esta plataforma conecta cidadãos ao poder público para identificar e resolver problemas urbanos e rurais que afetam a segurança e qualidade de vida.</p>
 
             {% if 'username' not in session %}
@@ -87,7 +87,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <h3><i class="fas fa-shield-alt"></i> CidadeFiscal</h3>
+                <h3><i class="fas fa-shield-alt"></i> VigiaDF</h3>
                 <p>Plataforma inteligente para mapear, classificar e tratar desordens urbanas com participação cidadã.</p>
             </div>
             <div class="footer-links">
@@ -112,7 +112,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 CidadeFiscal - Todos os direitos reservados</p>
+            <p>&copy; 2025 VigiaDF - Todos os direitos reservados</p>
         </div>
     </footer>
 </body>
