@@ -1,1 +1,88 @@
-.venv/*
+# Ambiente virtual
+venv/
+env/
+ENV/
+.venv/
+.env
+.python-version
+.envrc
+
+# Bytecode Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Diretórios de distribuição / empacotamento
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Arquivos Flask
+instance/
+.webassets-cache
+flask_session/
+
+# Banco de dados SQLite
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs
+*.log
+logs/
+log/
+
+# Diretório de uploads
+app/static/uploads/
+
+# Pasta de cache
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Arquivos de ambiente e configuração
+.env
+.flaskenv
+.flask.env
+*.cfg
+config.py
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+*.iws
+.idea_modules/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Específicos do seu projeto
+# Adicione arquivos e pastas específicos do seu projeto aqui
+
+# Arquivos temporários
+temp/
+tmp/
+.tmp/
+
+# Arquivos específicos para o hackathon
+key.txt
+credentials.json

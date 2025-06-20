@@ -13,6 +13,11 @@ class Issue(db.Model):
     longitude = db.Column(db.Float, nullable=False)
     photo_filename = db.Column(db.String(255))
     status = db.Column(db.String(20), default='pendente')
+    ai_validated = db.Column(db.Boolean, default=False)
+    ai_validation_result = db.Column(db.JSON, nullable=True)
+    needs_human_review = db.Column(db.Boolean, default=False)
+    human_reviewed = db.Column(db.Boolean, default=False)
+    human_review_result = db.Column(db.Boolean, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     

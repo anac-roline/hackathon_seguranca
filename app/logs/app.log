@@ -1,0 +1,71 @@
+2025-06-20 15:25:04,899 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 15:25:04,907 [INFO] - Código gerado: CDF-2506-0003
+2025-06-20 15:25:04,907 [INFO] - Processando foto: buraco-itaquera.jpg
+2025-06-20 15:25:04,908 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0003.jpg
+2025-06-20 15:25:04,908 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0003
+2025-06-20 15:25:04,909 [INFO] - Análise de IA concluída para CDF-2506-0003: {"valid": false, "error": "'Request' object has no attribute 'post'", "needs_review": true}
+2025-06-20 15:25:04,909 [WARNING] - Ocorrência CDF-2506-0003 marcada para revisão humana
+2025-06-20 15:25:04,915 [INFO] - Ocorrência CDF-2506-0003 salva com sucesso no banco de dados
+2025-06-20 15:29:12,969 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 15:29:12,978 [INFO] - Código gerado: CDF-2506-0004
+2025-06-20 15:29:12,978 [INFO] - Processando foto: buraco-itaquera.jpg
+2025-06-20 15:29:12,979 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0004.jpg
+2025-06-20 15:29:12,979 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0004
+2025-06-20 15:29:13,477 [INFO] - Análise de IA concluída para CDF-2506-0004: {"valid": false, "error": "401 Client Error: Unauthorized for url: https://api.openai.com/v1/chat/completions", "needs_review": true}
+2025-06-20 15:29:13,478 [WARNING] - Ocorrência CDF-2506-0004 marcada para revisão humana
+2025-06-20 15:29:13,486 [INFO] - Ocorrência CDF-2506-0004 salva com sucesso no banco de dados
+2025-06-20 15:40:51,486 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 15:40:51,495 [INFO] - Código gerado: CDF-2506-0005
+2025-06-20 15:40:51,495 [INFO] - Processando foto: buraco-itaquera.jpg
+2025-06-20 15:40:51,496 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0005.jpg
+2025-06-20 15:40:51,496 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0005
+2025-06-20 15:40:52,230 [INFO] - Análise de IA concluída para CDF-2506-0005: {"valid": false, "error": "401 Client Error: Unauthorized for url: https://api.openai.com/v1/chat/completions", "needs_review": true}
+2025-06-20 15:40:52,231 [WARNING] - Ocorrência CDF-2506-0005 marcada para revisão humana
+2025-06-20 15:40:52,234 [INFO] - Ocorrência CDF-2506-0005 salva com sucesso no banco de dados
+2025-06-20 15:43:10,901 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 15:43:10,907 [INFO] - Código gerado: CDF-2506-0006
+2025-06-20 15:43:10,908 [INFO] - Processando foto: buraco-itaquera.jpg
+2025-06-20 15:43:10,909 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0006.jpg
+2025-06-20 15:43:10,909 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0006
+2025-06-20 15:43:10,909 [ERROR] - Chave da API OpenAI não encontrada! Configure a variável de ambiente OPENAI_API_KEY
+2025-06-20 15:43:10,909 [ERROR] - Falha na análise de imagem: API key não configurada. Configure a variável de ambiente OPENAI_API_KEY
+2025-06-20 15:43:10,913 [INFO] - Ocorrência CDF-2506-0006 salva com sucesso no banco de dados
+2025-06-20 15:45:23,170 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 15:45:23,178 [INFO] - Código gerado: CDF-2506-0007
+2025-06-20 15:45:23,178 [INFO] - Processando foto: buraco-itaquera.jpg
+2025-06-20 15:45:23,179 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0007.jpg
+2025-06-20 15:45:23,179 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0007
+2025-06-20 15:47:28,037 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 15:47:28,045 [INFO] - Código gerado: CDF-2506-0007
+2025-06-20 15:47:28,045 [INFO] - Processando foto: buraco-itaquera.jpg
+2025-06-20 15:47:28,046 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0007.jpg
+2025-06-20 15:47:28,047 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0007
+2025-06-20 15:47:28,107 [INFO] - Analisando imagem com API Vision: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0007.jpg (categoria: 1)
+2025-06-20 15:47:28,107 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-20 15:47:29,766 [ERROR] - Erro na chamada à API Vision: Error code: 404 - {'error': {'message': 'The model `gpt-4-vision-preview` has been deprecated, learn more here: https://platform.openai.com/docs/deprecations', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-06-20 15:47:29,767 [INFO] - Análise de IA concluída para CDF-2506-0007: {"valid": false, "error": "Error code: 404 - {'error': {'message': 'The model `gpt-4-vision-preview` has been deprecated, learn more here: https://platform.openai.com/docs/deprecations', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}", "needs_review": true}
+2025-06-20 15:47:29,767 [WARNING] - Ocorrência CDF-2506-0007 marcada para revisão humana
+2025-06-20 15:47:29,772 [INFO] - Ocorrência CDF-2506-0007 salva com sucesso no banco de dados
+2025-06-20 15:48:43,792 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 15:48:43,798 [INFO] - Código gerado: CDF-2506-0008
+2025-06-20 15:48:43,798 [INFO] - Processando foto: buraco-itaquera.jpg
+2025-06-20 15:48:43,799 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0008.jpg
+2025-06-20 15:48:43,799 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0008
+2025-06-20 15:48:43,856 [INFO] - Analisando imagem com API Vision: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0008.jpg (categoria: 1)
+2025-06-20 15:48:43,856 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-20 15:48:49,988 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-20 15:48:49,988 [INFO] - Análise da imagem concluída: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["buraco", "rachaduras significativas", "deteriora\u00e7\u00e3o no asfalto"], "analysis": "A imagem mostra uma \u00e1rea com um buraco evidente e v\u00e1rias rachaduras na cal\u00e7ada e na jun\u00e7\u00e3o com o asfalto. A deteriora\u00e7\u00e3o \u00e9 significativa e pode afetar a seguran\u00e7a dos pedestres e ve\u00edculos.", "needs_human_review": true, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-20 15:48:49,989 [INFO] - Análise de IA concluída para CDF-2506-0008: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["buraco", "rachaduras significativas", "deteriora\u00e7\u00e3o no asfalto"], "analysis": "A imagem mostra uma \u00e1rea com um buraco evidente e v\u00e1rias rachaduras na cal\u00e7ada e na jun\u00e7\u00e3o com o asfalto. A deteriora\u00e7\u00e3o \u00e9 significativa e pode afetar a seguran\u00e7a dos pedestres e ve\u00edculos.", "needs_human_review": true, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-20 15:48:49,989 [WARNING] - Ocorrência CDF-2506-0008 marcada para revisão humana
+2025-06-20 15:48:49,991 [INFO] - Ocorrência CDF-2506-0008 salva com sucesso no banco de dados
+2025-06-20 16:07:51,589 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 16:07:51,615 [INFO] - Código gerado: CDF-2506-0009
+2025-06-20 16:07:51,615 [INFO] - Processando foto: cratera-joao-pessoa-bayeux.webp
+2025-06-20 16:07:51,616 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0009.webp
+2025-06-20 16:07:51,616 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0009
+2025-06-20 16:07:51,661 [INFO] - Analisando imagem com API Vision: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0009.webp (categoria: 1)
+2025-06-20 16:07:51,661 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-20 16:07:56,753 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-20 16:07:56,753 [INFO] - Análise da imagem concluída: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["buraco", "deteriora\u00e7\u00e3o significativa do asfalto", "afundamento"], "analysis": "A imagem mostra um grande buraco no asfalto, indicando deteriora\u00e7\u00e3o significativa da via com partes do asfalto quebrado e expostas.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": false}
+2025-06-20 16:07:56,753 [INFO] - Análise de IA concluída para CDF-2506-0009: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["buraco", "deteriora\u00e7\u00e3o significativa do asfalto", "afundamento"], "analysis": "A imagem mostra um grande buraco no asfalto, indicando deteriora\u00e7\u00e3o significativa da via com partes do asfalto quebrado e expostas.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": false}
+2025-06-20 16:07:56,760 [INFO] - Ocorrência CDF-2506-0009 salva com sucesso no banco de dados
