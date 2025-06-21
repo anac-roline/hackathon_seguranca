@@ -18,8 +18,9 @@ class Issue(db.Model):
     needs_human_review = db.Column(db.Boolean, default=False)
     human_reviewed = db.Column(db.Boolean, default=False)
     human_review_result = db.Column(db.Boolean, nullable=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    companie = db.Column(db.String(255), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
     
     # Relacionamento com o usuário
     user = db.relationship('User', backref=db.backref('issues', lazy=True))

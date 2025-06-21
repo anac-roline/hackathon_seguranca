@@ -11,6 +11,20 @@ CATEGORY_PROMPTS = {
         "expected_elements": ["poste", "lâmpada", "luminária", "fiação"],
         "confidence_threshold": 0.65
     },
+    3:{ # Coleta de Lixo
+        "system_prompt": "Você é um especialista em gestão de resíduos urbanos e coleta de lixo.",
+        "user_prompt": "Analise esta imagem e determine se mostra um problema relacionado à coleta de lixo, como: acúmulo de lixo, entulho, falta de coleta, lixeira transbordando ou lixo espalhado.",
+        "expected_elements": ["lixo", "entulho", "lixeira", "acúmulo"],
+        "confidence_threshold": 0.7
+        
+    },
+    4:{ # Agua / esgoto
+        "system_prompt": "Você é um especialista em análise de problemas de água e esgoto urbanos.",
+        "user_prompt": "Analise esta imagem e determine se mostra um problema relacionado a água ou esgoto, como: vazamento, entupimento, esgoto a céu aberto, poça d'água anormal. Não considere pequenas poças normais.",
+        "expected_elements": ["vazamento", "entupimento", "poça d'água", "esgoto"],
+        "confidence_threshold": 0.7
+        
+    },
     # Outras categorias...
     "default": {
         "system_prompt": "Você é um especialista em análise de problemas urbanos e infraestrutura pública.",

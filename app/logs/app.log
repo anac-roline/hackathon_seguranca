@@ -199,3 +199,117 @@ OPENAPI_API_KEY
 2025-06-20 21:10:30,623 [INFO] - Encontradas 1 ocorrências para o usuário 1
 2025-06-20 21:13:01,862 [INFO] - Encontradas 1 ocorrências para o usuário 1
 >>>>>>> 4099700ba213b5d67bd2144036728fdfab6315c1
+2025-06-20 21:56:39,832 [INFO] - Encontradas 2 ocorrências para o usuário 1
+2025-06-20 21:59:19,599 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 21:59:19,603 [INFO] - Código gerado: CDF-2506-0003
+2025-06-20 21:59:19,603 [INFO] - Processando foto: rua pouca luz.jpeg
+2025-06-20 21:59:19,604 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0003.jpeg
+2025-06-20 21:59:19,605 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0003
+2025-06-20 21:59:19,659 [INFO] - Analisando imagem com API Vision: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0003.jpeg (categoria: 2)
+2025-06-20 21:59:19,659 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-20 21:59:22,105 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-20 21:59:22,105 [INFO] - Análise da imagem concluída: {"valid": true, "confidence": 0.75, "matches_description": true, "detected_elements": ["poste sem luz"], "analysis": "A imagem mostra uma \u00e1rea com ilumina\u00e7\u00e3o p\u00fablica insuficiente, com postes de luz aparentemente apagados ou sem funcionamento.", "needs_human_review": true, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-20 21:59:22,106 [INFO] - Análise de IA concluída para CDF-2506-0003: {"valid": true, "confidence": 0.75, "matches_description": true, "detected_elements": ["poste sem luz"], "analysis": "A imagem mostra uma \u00e1rea com ilumina\u00e7\u00e3o p\u00fablica insuficiente, com postes de luz aparentemente apagados ou sem funcionamento.", "needs_human_review": true, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-20 21:59:22,106 [WARNING] - Ocorrência CDF-2506-0003 marcada para revisão humana
+2025-06-20 21:59:22,113 [INFO] - Ocorrência CDF-2506-0003 salva com sucesso no banco de dados
+2025-06-20 21:59:22,123 [INFO] - Encontradas 3 ocorrências para o usuário 1
+2025-06-20 22:07:46,338 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 22:07:46,344 [INFO] - Código gerado: CDF-2506-0004
+2025-06-20 22:07:46,344 [INFO] - Processando foto: lixo rua.webp
+2025-06-20 22:07:46,345 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0004.webp
+2025-06-20 22:07:46,345 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0004
+2025-06-20 22:07:46,372 [INFO] - Analisando imagem com API Vision: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0004.webp (categoria: 3)
+2025-06-20 22:07:46,372 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-20 22:07:51,414 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-20 22:07:51,414 [INFO] - Análise da imagem concluída: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["lixo acumulado", "vias p\u00fablicas", "cal\u00e7ada obstru\u00edda"], "analysis": "A imagem mostra uma grande quantidade de lixo acumulado na via p\u00fablica, o que representa um problema de infraestrutura urbana relacionado \u00e0 coleta de res\u00edduos e manuten\u00e7\u00e3o das vias.", "needs_human_review": false, "category_id": 3, "threshold": 0.6, "needs_review": false}
+2025-06-20 22:07:51,414 [INFO] - Análise de IA concluída para CDF-2506-0004: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["lixo acumulado", "vias p\u00fablicas", "cal\u00e7ada obstru\u00edda"], "analysis": "A imagem mostra uma grande quantidade de lixo acumulado na via p\u00fablica, o que representa um problema de infraestrutura urbana relacionado \u00e0 coleta de res\u00edduos e manuten\u00e7\u00e3o das vias.", "needs_human_review": false, "category_id": 3, "threshold": 0.6, "needs_review": false}
+2025-06-20 22:07:51,420 [INFO] - Ocorrência CDF-2506-0004 salva com sucesso no banco de dados
+2025-06-20 22:07:51,431 [INFO] - Encontradas 4 ocorrências para o usuário 1
+2025-06-20 22:17:03,473 [INFO] - Encontradas 4 ocorrências para o usuário 1
+2025-06-20 22:25:25,862 [INFO] - Encontradas 4 ocorrências para o usuário 1
+2025-06-20 22:35:16,272 [INFO] - Encontradas 4 ocorrências para o usuário 1
+2025-06-20 22:36:13,944 [INFO] - Encontradas 4 ocorrências para o usuário 1
+2025-06-20 23:05:34,627 [INFO] - Encontradas 4 ocorrências para o usuário 1
+2025-06-20 23:26:30,938 [INFO] - Encontradas 4 ocorrências para o usuário 1
+2025-06-20 23:27:25,484 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 23:27:25,490 [INFO] - Código gerado: CDF-2506-0005
+2025-06-20 23:27:25,490 [INFO] - Processando foto: rua pouca luz.jpeg
+2025-06-20 23:27:25,491 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0005.jpeg
+2025-06-20 23:27:25,494 [ERROR] - Erro ao processar ocorrência: 'list' object has no attribute 'get'
+2025-06-20 23:28:34,805 [INFO] - Encontradas 4 ocorrências para o usuário 1
+2025-06-20 23:29:12,940 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 23:29:12,946 [INFO] - Código gerado: CDF-2506-0005
+2025-06-20 23:29:12,946 [INFO] - Processando foto: rua pouca luz.jpeg
+2025-06-20 23:29:12,947 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0005.jpeg
+2025-06-20 23:29:12,949 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0005
+2025-06-20 23:29:13,013 [INFO] - Analisando imagem com API Vision: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0005.jpeg (categoria: 2)
+2025-06-20 23:29:13,013 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-20 23:29:15,889 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-20 23:29:15,889 [INFO] - Análise da imagem concluída: {"valid": true, "confidence": 0.8, "matches_description": true, "detected_elements": ["poste sem luz"], "analysis": "A imagem mostra uma rua onde h\u00e1 ilumina\u00e7\u00e3o parcial. Alguns postes parecem n\u00e3o estar iluminados, indicando um poss\u00edvel problema de poste sem luz.", "needs_human_review": true, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-20 23:29:15,890 [INFO] - Análise de IA concluída para CDF-2506-0005: {"valid": true, "confidence": 0.8, "matches_description": true, "detected_elements": ["poste sem luz"], "analysis": "A imagem mostra uma rua onde h\u00e1 ilumina\u00e7\u00e3o parcial. Alguns postes parecem n\u00e3o estar iluminados, indicando um poss\u00edvel problema de poste sem luz.", "needs_human_review": true, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-20 23:29:15,890 [WARNING] - Ocorrência CDF-2506-0005 marcada para revisão humana
+2025-06-20 23:29:15,899 [INFO] - Ocorrência CDF-2506-0005 salva com sucesso no banco de dados
+2025-06-20 23:29:15,909 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:33:27,113 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:33:38,459 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:36:07,844 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:37:22,877 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:37:40,151 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:37:54,110 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:37:55,552 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:37:56,231 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:37:57,004 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:37:57,915 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:38:40,505 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:41:25,388 [ERROR] - Erro ao buscar ocorrências: 'Issue' object has no attribute 'ia_validation_result'
+2025-06-20 23:42:24,692 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:43:12,765 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:44:45,407 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:45:56,278 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:47:17,015 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:48:16,011 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:48:40,175 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:49:40,830 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:50:25,690 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:50:33,285 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:50:58,255 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:51:41,769 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:58:01,822 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-20 23:59:44,448 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:00:40,781 [INFO] - Encontradas 4 ocorrências para o usuário 1
+2025-06-21 00:02:22,446 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-21 00:02:22,452 [INFO] - Código gerado: CDF-2506-0006
+2025-06-21 00:02:22,452 [INFO] - Processando foto: pato.jpg
+2025-06-21 00:02:22,453 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0006.jpg
+2025-06-21 00:02:22,455 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0006
+2025-06-21 00:02:22,507 [INFO] - Analisando imagem com API Vision: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0006.jpg (categoria: 4)
+2025-06-21 00:02:22,507 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 00:02:25,916 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 00:02:25,917 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["duck", "cartoon"], "analysis": "A imagem mostra um pato de desenho animado e n\u00e3o apresenta nenhum problema de \u00e1gua ou esgoto.", "needs_human_review": false, "category_id": 4, "threshold": 0.7, "needs_review": true}
+2025-06-21 00:02:25,918 [INFO] - Análise de IA concluída para CDF-2506-0006: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["duck", "cartoon"], "analysis": "A imagem mostra um pato de desenho animado e n\u00e3o apresenta nenhum problema de \u00e1gua ou esgoto.", "needs_human_review": false, "category_id": 4, "threshold": 0.7, "needs_review": true}
+2025-06-21 00:02:25,918 [WARNING] - Ocorrência CDF-2506-0006 marcada para revisão humana
+2025-06-21 00:02:25,925 [INFO] - Ocorrência CDF-2506-0006 salva com sucesso no banco de dados
+2025-06-21 00:02:25,935 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:07:46,568 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:09:39,822 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:12:48,634 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:19:36,190 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:38:50,409 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:39:15,322 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:41:18,026 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:42:17,661 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:48:30,280 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:49:30,766 [INFO] - Encontradas 5 ocorrências para o usuário 1
+2025-06-21 00:50:42,834 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-21 00:50:42,839 [INFO] - Código gerado: CDF-2506-0007
+2025-06-21 00:50:42,840 [INFO] - Processando foto: cratera-joao-pessoa-bayeux.webp
+2025-06-21 00:50:42,840 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0007.webp
+2025-06-21 00:50:42,842 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0007
+2025-06-21 00:50:42,896 [INFO] - Analisando imagem com API Vision: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0007.webp (categoria: 1)
+2025-06-21 00:50:42,896 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 00:50:49,196 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 00:50:49,197 [INFO] - Análise da imagem concluída: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["buraco", "deteriora\u00e7\u00e3o severa do asfalto"], "analysis": "A imagem mostra um buraco grande e significativo na via p\u00fablica com asfalto visivelmente danificado e afundado.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": false}
+2025-06-21 00:50:49,198 [INFO] - Análise de IA concluída para CDF-2506-0007: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["buraco", "deteriora\u00e7\u00e3o severa do asfalto"], "analysis": "A imagem mostra um buraco grande e significativo na via p\u00fablica com asfalto visivelmente danificado e afundado.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": false}
+2025-06-21 00:50:49,198 [WARNING] - Ocorrência CDF-2506-0007 marcada para revisão humana
+2025-06-21 00:50:49,204 [INFO] - Ocorrência CDF-2506-0007 salva com sucesso no banco de dados
+2025-06-21 00:50:49,215 [INFO] - Encontradas 6 ocorrências para o usuário 1

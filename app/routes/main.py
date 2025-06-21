@@ -10,6 +10,7 @@ from app.models.prompt_feedback import PromptFeedback
 from sqlalchemy import func
 from app.utils.vision_analyzer import VisionAnalyzer
 from app.utils.logger import log
+from app.config.settings import Settings
 from app import app
 from flask import render_template, session, flash, redirect, url_for, Blueprint
 from app.utils.statistics import calcular_estatisticas #, calcular_estatisticas_globais, calcular_estatisticas_usuario # Funções separadas
@@ -32,6 +33,30 @@ def analista_required(f):
         flash("Acesso restrito a usuários com permissão de analista.", "error")
         return redirect(url_for('main.dashboard')) # Ou para a página inicial
     return decorated_function
+
+def calcular_estatisticas():
+    """Conecta ao banco e calcula as métricas de ocorrências."""
+    with app.app_context():
+        # Total de ocorrências reportadas
+        ocorrencias_reportadas = Issue.query.count()
+        
+        # Ocorrências com status 'resolvido'
+        # IMPORTANTE: Ajuste a string 'resolvido' se o seu status tiver outro nome
+        ocorrencias_resolvidas = Issue.query.filter_by(status='concluida').count()
+
+        # Ocorrências com status 'em_andamento'
+        # IMPORTANTE: Ajuste a string 'em_andamento' se o seu status tiver outro nome
+        ocorrencias_em_andamento = Issue.query.filter_by(status='pendente').count()
+        
+        # Impacto Social: número de usuários únicos que reportaram ocorrências
+        revisao = Issue.query.filter_by(status='analise').count()
+
+        return {
+            "ocorrencias_reportadas": ocorrencias_reportadas,
+            "ocorrencias_resolvidas": ocorrencias_resolvidas,
+            "ocorrencias_em_andamento": ocorrencias_em_andamento,
+            "revisao": revisao
+        }
 
 @main_bp.route('/')
 def index():
@@ -125,6 +150,39 @@ def dashboard_analista():
             'status': issue.status
         } for issue in all_issues
     ]
+    # Mapeamento de categorias 
+    categorias = {
+        1: "Buraco na Via",
+        2: "Iluminação Pública",
+        3: "Lixo/Entulho",
+        4: "Vazamento de Água/Esgoto"
+    }
+    
+    try:
+        # Buscar as ocorrências do usuário atual
+        issues = Issue.query.filter_by(user_id=session['user_id']).order_by(Issue.created_at.desc()).all()
+        
+        # Preparar dados para o mapa (serializar)
+        issues_json = []
+        for issue in issues:
+            print(issue.ai_validation_result.get('analysis', ''))
+            issues_json.append({
+                'issue_code': issue.issue_code,
+                'description': issue.description,
+                'latitude': float(issue.latitude),
+                'longitude': float(issue.longitude),
+                'status': issue.status,
+                'category_id': issue.category_id,
+                'photo_filename': issue.photo_filename,
+                'mensagem': issue.ai_validation_result,
+            })
+        
+        log.info(f"Encontradas {len(issues)} ocorrências para o usuário {session['user_id']}")
+    except Exception as e:
+        log.error(f"Erro ao buscar ocorrências: {str(e)}")
+        issues = []
+        issues_json = []
+        flash("Não foi possível carregar suas ocorrências. Tente novamente mais tarde.", "error")
     
     return render_template(
         'dashboard_analista.html', 
@@ -204,6 +262,12 @@ def report_issue():
                 photo.save(photo_path)
                 log.info(f"Foto salva em: {photo_path}")
             
+            config = Settings()
+                
+            # efetua a busca do ID da empresa no  config e captura o name, se nao encontrar define como prefeitura
+            
+            c = next((item["name"] for item in config.COMPANIES if item["id"] == int(category_id)), "RAs")
+            
             # Criar nova ocorrência
             new_issue = Issue(
                 issue_code=issue_code,
@@ -213,7 +277,8 @@ def report_issue():
                 latitude=float(latitude),
                 longitude=float(longitude),
                 photo_filename=photo_filename,
-                status='pendente'
+                status='pendente',
+                companie=c
             )
             
             # Analisar a imagem se disponível
@@ -225,10 +290,14 @@ def report_issue():
                         analyzer = VisionAnalyzer()
                         analysis_result = analyzer.analyze_image(photo_path, int(category_id))
                         
+                        human_review= analysis_result.get("human_review", True)
+                        if human_review:
+                            new_issue.status = 'analise'
+                        
                         # Adicionar resultados à ocorrência
                         new_issue.ai_validated = True
                         new_issue.ai_validation_result = analysis_result
-                        new_issue.needs_human_review = analysis_result.get("needs_review", True)
+                        new_issue.needs_human_review = human_review
                         
                         # Logar o resultado
                         log.info(f"Análise de IA concluída para {issue_code}: {json.dumps(analysis_result)}")

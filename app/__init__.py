@@ -18,9 +18,11 @@ db.init_app(app)
 # Importa e registra os blueprints
 from app.routes.main import main_bp
 from app.routes.auth import auth_bp
+from app.routes.admin import admin_bp
 
 app.register_blueprint(main_bp)
 app.register_blueprint(auth_bp)
+app.register_blueprint(admin_bp)
 
 # Definir pasta de uploads
 app.static_folder = os.path.join(os.path.dirname(__file__), 'static')
