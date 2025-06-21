@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from app.models.user import User
+from app.commands import create_admin
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -35,6 +36,7 @@ def signup():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     """Página de login."""
+    create_admin(db)
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
