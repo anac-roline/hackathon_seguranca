@@ -1,0 +1,474 @@
+{% extends "base.html" %} {% block title %}Reportar Ocorrência{% endblock %} {%
+block content %}
+<div class="report-container">
+  <h1>Reportar Nova Ocorrência</h1>
+  <p class="report-intro">
+    Preencha os dados abaixo para informar um problema em sua cidade.
+  </p>
+
+  <form
+    id="reportForm"
+    action="{{ url_for('main.report_issue') }}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <!-- Campo oculto para coordenadas -->
+    <input type="hidden" id="latitude" name="latitude" />
+    <input type="hidden" id="longitude" name="longitude" />
+
+    <!-- Seção do Mapa -->
+    <div class="form-section">
+      <h2><i class="fas fa-map-marker-alt"></i> Localização</h2>
+      <div class="location-controls">
+        <button type="button" id="getCurrentLocation" class="btn-location">
+          <i class="fas fa-crosshairs"></i> Usar Minha Localização Atual
+        </button>
+        <p id="locationStatus" class="location-status"></p>
+      </div>
+
+      <div id="mapContainer" class="map-container">
+        <div id="map"></div>
+      </div>
+      <p class="map-hint">
+        Arraste o marcador para ajustar a localização exata do problema.
+      </p>
+    </div>
+
+    <!-- Seção da Categoria -->
+    <div class="form-section">
+      <h2><i class="fas fa-tag"></i> Categoria</h2>
+      <div class="category-selector">
+        <select name="category_id" id="category" required>
+          <option value="" disabled selected>
+            Selecione a categoria do problema
+          </option>
+          <option value="1">Buraco na Via</option>
+          <option value="2">Iluminação Pública</option>
+          <option value="3">Lixo/Entulho</option>
+          <option value="4">Vazamento de Água/Esgoto</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Seção da Observação -->
+    <div class="form-section">
+      <h2><i class="fas fa-comment"></i> Observação</h2>
+      <textarea
+        name="description"
+        id="description"
+        rows="4"
+        placeholder="Descreva o problema em detalhes..."
+        required
+      ></textarea>
+    </div>
+
+    <!-- Seção da Foto -->
+    <div class="form-section">
+      <h2><i class="fas fa-camera"></i> Foto do Problema</h2>
+      <div class="photo-container">
+        <div class="photo-preview-container">
+          <img
+            id="photoPreview"
+            src="#"
+            alt="Prévia da Foto"
+            style="display: none"
+          />
+        </div>
+
+        <div class="photo-controls">
+          <!-- Input para arquivo -->
+          <input
+            type="file"
+            id="fileInput"
+            name="photo"
+            accept="image/*"
+            style="display: none"
+          />
+
+          <!-- Input para câmera -->
+          <input
+            type="file"
+            id="cameraInput"
+            accept="image/*"
+            capture="environment"
+            style="display: none"
+          />
+
+          <div class="photo-controls">
+            <label for="fileInput" class="btn-photo">
+              <i class="fas fa-upload"></i> Escolher Arquivo
+            </label>
+
+            <button type="button" id="takeCameraPhoto" class="btn-photo">
+              <i class="fas fa-camera"></i> Tirar Foto
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão de Envio -->
+    <div class="submit-section">
+      <button type="submit" class="btn-submit">
+        <i class="fas fa-paper-plane"></i> Enviar Ocorrência
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- CSS específico para a página -->
+<style>
+  .report-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .report-intro {
+    margin-bottom: 25px;
+    color: #666;
+  }
+
+  .form-section {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .form-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-section h2 i {
+    margin-right: 10px;
+    color: #4caf50;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 300px;
+    margin: 15px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+  }
+
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+
+  .location-controls {
+    display: flex;
+    align-items: center;
+  }
+
+  .btn-location {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .btn-location i {
+    margin-right: 5px;
+  }
+
+  .location-status {
+    margin-left: 15px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .map-hint {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 5px;
+  }
+
+  .category-selector select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+  }
+
+  .photo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .photo-preview-container {
+    width: 100%;
+    height: 200px;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #photoPreview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .photo-controls {
+    display: flex;
+    gap: 15px;
+  }
+
+  .file-input-container {
+    position: relative;
+  }
+
+  .file-input-container input[type="file"] {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .btn-photo {
+    display: inline-flex;
+    align-items: center;
+    background: #2196f3;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border: none;
+  }
+
+  .btn-photo i {
+    margin-right: 5px;
+  }
+
+  .submit-section {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .btn-submit {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .btn-submit i {
+    margin-right: 10px;
+  }
+
+  .btn-submit:hover {
+    background: #3d8b40;
+  }
+</style>
+
+<!-- Leaflet CSS e JS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- JavaScript para a funcionalidade da página -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Elementos do DOM
+    const latitudeInput = document.getElementById("latitude");
+    const longitudeInput = document.getElementById("longitude");
+    const locationBtn = document.getElementById("getCurrentLocation");
+    const statusText = document.getElementById("locationStatus");
+    const fileInput = document.getElementById("fileInput");
+    const cameraInput = document.getElementById("cameraInput");
+    const photoPreview = document.getElementById("photoPreview");
+    const takeCameraBtn = document.getElementById("takeCameraPhoto");
+
+    // Coordenadas padrão (centro de São Paulo)
+    let defaultLat = -15.7835816071744;
+    let defaultLng = -47.899209408080765;
+    let marker;
+    let map;
+
+    // Inicializar o mapa
+    initMap(defaultLat, defaultLng);
+
+    // Função para inicializar o mapa
+    function initMap(lat, lng) {
+      // Criar o mapa
+      map = L.map("map").setView([lat, lng], 15);
+
+      // Adicionar camada de tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      // Adicionar marcador
+      marker = L.marker([lat, lng], {
+        draggable: true,
+      }).addTo(map);
+
+      // Atualizar inputs ocultos quando o marcador for movido
+      marker.on("dragend", function (event) {
+        const position = marker.getLatLng();
+        latitudeInput.value = position.lat;
+        longitudeInput.value = position.lng;
+        statusText.textContent = `Posição ajustada: ${position.lat.toFixed(
+          6
+        )}, ${position.lng.toFixed(6)}`;
+      });
+
+      // Clicar no mapa também move o marcador
+      map.on("click", function (e) {
+        marker.setLatLng(e.latlng);
+        latitudeInput.value = e.latlng.lat;
+        longitudeInput.value = e.latlng.lng;
+        statusText.textContent = `Posição ajustada: ${e.latlng.lat.toFixed(
+          6
+        )}, ${e.latlng.lng.toFixed(6)}`;
+      });
+
+      // Definir valores iniciais
+      latitudeInput.value = lat;
+      longitudeInput.value = lng;
+    }
+
+    // Botão para obter localização atual
+    locationBtn.addEventListener("click", function () {
+      statusText.textContent = "Obtendo sua localização...";
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          // Sucesso
+          function (position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            // Atualizar marcador e mapa
+            marker.setLatLng([lat, lng]);
+            map.setView([lat, lng], 16);
+
+            // Atualizar inputs ocultos
+            latitudeInput.value = lat;
+            longitudeInput.value = lng;
+
+            statusText.textContent = `Localização obtida: ${lat.toFixed(
+              6
+            )}, ${lng.toFixed(6)}`;
+          },
+          // Erro
+          function (error) {
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                statusText.textContent = "Permissão de localização negada.";
+                break;
+              case error.POSITION_UNAVAILABLE:
+                statusText.textContent =
+                  "Informação de localização indisponível.";
+                break;
+              case error.TIMEOUT:
+                statusText.textContent = "Tempo esgotado ao obter localização.";
+                break;
+              case error.UNKNOWN_ERROR:
+                statusText.textContent =
+                  "Erro desconhecido ao obter localização.";
+                break;
+            }
+          }
+        );
+      } else {
+        statusText.textContent =
+          "Geolocalização não é suportada neste navegador.";
+      }
+    });
+
+    // Função para exibir prévia da foto
+    function handleFilePreview(fileInputElement) {
+      if (fileInputElement.files && fileInputElement.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          photoPreview.src = e.target.result;
+          photoPreview.style.display = "block";
+        };
+        reader.readAsDataURL(fileInputElement.files[0]);
+      }
+    }
+
+    // Exibir prévia quando o arquivo é selecionado da galeria
+    fileInput.addEventListener("change", function() {
+      handleFilePreview(this);
+    });
+
+    // Exibir prévia quando a foto é tirada com a câmera
+    cameraInput.addEventListener("change", function() {
+      handleFilePreview(this);
+    });
+
+    // Botão para tirar foto com a câmera
+    takeCameraBtn.addEventListener("click", function () {
+      cameraInput.click();
+    });
+
+    // Validação do formulário antes de enviar
+    document
+      .getElementById("reportForm")
+      .addEventListener("submit", function (e) {
+        if (!latitudeInput.value || !longitudeInput.value) {
+          e.preventDefault();
+          alert("Por favor, defina a localização do problema no mapa.");
+          return false;
+        }
+        
+        // Garantir que pelo menos um dos inputs tenha um arquivo
+        if (fileInput.files.length === 0 && cameraInput.files.length === 0) {
+          e.preventDefault();
+          alert("Por favor, adicione uma foto do problema.");
+          return false;
+        }
+        
+        // Se apenas o cameraInput tiver arquivo, copie para o fileInput que tem o atributo 'name'
+        if (fileInput.files.length === 0 && cameraInput.files.length > 0) {
+          // Não podemos simplesmente atribuir files diretamente por segurança do navegador
+          // Em vez disso, enviamos o formulário com o cameraInput tendo o atributo 'name'
+          cameraInput.name = "photo";
+        }
+      });
+  });
+</script>
+{% endblock %}

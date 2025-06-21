@@ -1,21 +1,185 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+<div class="form-container">
+  <div class="auth-logo">
+    <i class="fas fa-shield-alt"></i>
+  </div>
+  <h2>Entrar na sua conta</h2>
 
-{% block title %}Login{% endblock %}
-
-{% block content %}
-    <div class="form-container">
-        <h2>Acessar sua Conta</h2>
-        <form method="POST" action="{{ url_for('login') }}">
-            <div class="form-group">
-                <label for="username">Nome de Usuário</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn">Entrar</button>
-        </form>
-        <p class="form-link">Não tem uma conta? <a href="{{ url_for('signup') }}">Cadastre-se</a></p>
+  <form method="POST" action="{{ url_for('auth.login') }}">
+    <div class="form-group">
+      <label for="username">Usuário ou Email</label>
+      <div class="input-with-icon">
+        <i class="fas fa-user"></i>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-control"
+          required
+          autocomplete="username"
+          autofocus
+        />
+      </div>
     </div>
+
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <div class="input-with-icon">
+        <i class="fas fa-lock"></i>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          required
+          autocomplete="current-password"
+        />
+      </div>
+    </div>
+
+    <div class="form-options">
+      <div class="remember-me">
+        <input type="checkbox" id="remember" name="remember" />
+        <label for="remember">Lembrar-me</label>
+      </div>
+      <a href="#" class="forgot-password">Esqueceu a senha?</a>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+  </form>
+
+  <div class="form-link">
+    Não tem uma conta? <a href="{{ url_for('auth.signup') }}">Cadastre-se</a>
+  </div>
+</div>
+
+<style>
+  .form-container {
+    max-width: 420px;
+    margin: 2rem auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-top: 4px solid var(--primary);
+  }
+
+  .auth-logo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    color: var(--primary);
+  }
+
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--gray-800);
+    font-weight: 600;
+  }
+
+  .input-with-icon {
+    position: relative;
+  }
+
+  .input-with-icon i {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-500);
+  }
+
+  .input-with-icon input {
+    padding-left: 2.5rem;
+  }
+
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .forgot-password {
+    color: var(--primary);
+  }
+
+  .auth-divider {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+
+  .auth-divider::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: var(--gray-300);
+  }
+
+  .auth-divider span {
+    position: relative;
+    background-color: white;
+    padding: 0 1rem;
+    color: var(--gray-500);
+    font-size: 0.9rem;
+  }
+
+  .social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+  }
+
+  .btn-social:hover {
+    opacity: 0.9;
+    color: white;
+    text-decoration: none;
+  }
+
+  .btn-google {
+    background-color: #ea4335;
+  }
+
+  .btn-facebook {
+    background-color: #3b5998;
+  }
+
+  .form-link {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+
+  .form-link a {
+    color: var(--primary);
+    font-weight: 500;
+  }
+</style>
 {% endblock %}

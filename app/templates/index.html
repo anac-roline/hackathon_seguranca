@@ -3,14 +3,44 @@
 {% block title %}Página Inicial{% endblock %}
 
 {% block content %}
-    <div class="content-box">
-        <h1>Bem-vindo ao Sistema de Login</h1>
-        <p>Esta é uma aplicação de exemplo demonstrando um sistema de autenticação completo com Flask.</p>
-        {% if 'username' not in session %}
-        <p>Faça <a href="{{ url_for('login') }}">login</a> ou <a href="{{ url_for('signup') }}">crie uma conta</a> para continuar.</p>
-        {% else %}
-        <p>Você está logado como <strong>{{ session['username'] }}</strong>.</p>
-        <p>Vá para o seu <a href="{{ url_for('dashboard') }}">dashboard</a>.</p>
-        {% endif %}
+<div class="home-header">
+    <h1>Transformando nossa cidade juntos</h1>
+    <p>Use o VigiaDF para reportar problemas urbanos e acompanhar a resolução pelo poder público.</p>
+</div>
+
+<div class="content-box">
+    <h1>Bem-vindo ao VigiaDF</h1>
+    <p>Esta plataforma conecta cidadãos ao poder público para identificar e resolver problemas urbanos e rurais que afetam a segurança e qualidade de vida.</p>
+    
+    {% if request.cookies.get('id', None) %}
+    <p>Faça <a href="{{ url_for('auth.login') }}">login</a> ou <a href="{{ url_for('auth.signup') }}">crie uma conta</a> para começar a reportar ocorrências.</p>
+    {% else %}
+    <p>Você está logado como <strong>{{ request.cookies.get('username', None) }}</strong>.</p>
+    <p>Acesse seu <a href="{{ url_for('main.dashboard') }}">dashboard</a> ou <a href="{{ url_for('main.report_issue') }}">reporte uma nova ocorrência</a>.</p>
+    {% endif %}
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-map-marked-alt"></i>
+        </div>
+        <h3>Georreferenciamento</h3>
+        <p>Localize e acompanhe ocorrências em tempo real com mapas interativos.</p>
     </div>
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-robot"></i>
+        </div>
+        <h3>IA para Classificação</h3>
+        <p>Classificação automática e direcionamento para o órgão responsável.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <h3>Análise Preditiva</h3>
+        <p>Prevenção de problemas com análise de padrões e tendências.</p>
+    </div>
+</div>
 {% endblock %}

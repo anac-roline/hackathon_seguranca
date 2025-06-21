@@ -1,0 +1,715 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Detalhes da Ocorrência #{{ issue.issue_code }}{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h1>Detalhes da Ocorrência #{{ issue.issue_code }}</h1>
+    <div class="breadcrumb">
+        <a href="{{ url_for('admin.index') }}">Dashboard</a>
+        <span class="breadcrumb-divider">/</span>
+        <span>Detalhes da Ocorrência</span>
+    </div>
+</div>
+
+<div class="issue-detail-grid">
+    <!-- Informações Principais -->
+    <div class="card issue-main-card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-info-circle"></i> Informações Principais
+            </div>
+            <div class="card-actions">
+                <span class="status-pill {{ issue.status }}">
+                    {% if issue.status == 'pendente' %}
+                        <i class="fas fa-clock"></i> Pendente
+                    {% elif issue.status == 'em_analise' %}
+                        <i class="fas fa-search"></i> Em Análise
+                    {% elif issue.status == 'em_processamento' %}
+                        <i class="fas fa-cog"></i> Em Processamento
+                    {% elif issue.status == 'resolvido' %}
+                        <i class="fas fa-check-circle"></i> Resolvido
+                    {% elif issue.status == 'cancelado' %}
+                        <i class="fas fa-times-circle"></i> Cancelado
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="issue-info-grid">
+                <div class="info-group">
+                    <div class="info-label">Categoria</div>
+                    <div class="info-value">{{ category_name }}</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Reportado por</div>
+                    <div class="info-value">{{ issue.user.username if issue.user else 'Usuário não encontrado' }}</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Data de Criação</div>
+                    <div class="info-value">{{ issue.created_at.strftime('%d/%m/%Y %H:%M') }}</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Última Atualização</div>
+                    <div class="info-value">{{ issue.updated_at.strftime('%d/%m/%Y %H:%M') }}</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Órgão Responsável</div>
+                    <div class="info-value">{{ issue.companie or 'Não atribuído' }}</div>
+                </div>
+                {% if resolution_time %}
+                <div class="info-group">
+                    <div class="info-label">Tempo de Resolução</div>
+                    <div class="info-value">{{ resolution_time }}</div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="description-box">
+                <div class="info-label">Descrição</div>
+                <div class="description-content">
+                    {{ issue.description }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Localização -->
+    <div class="card issue-location-card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-map-marker-alt"></i> Localização
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="location-info-grid">
+                <div class="info-group">
+                    <div class="info-label">Coordenadas</div>
+                    <div class="info-value">{{ issue.latitude }}, {{ issue.longitude }}</div>
+                </div>
+                
+                <!-- Estes campos seriam preenchidos por geocodificação reversa no backend -->
+                <div class="info-group">
+                    <div class="info-label">Endereço</div>
+                    <div class="info-value">{{ location_data.street if location_data.street|default(false) else 'Não disponível' }}</div>
+                </div>
+                
+                <div class="info-group">
+                    <div class="info-label">Bairro</div>
+                    <div class="info-value">{{ location_data.neighborhood if location_data.neighborhood|default(false) else 'Não disponível' }}</div>
+                </div>
+                
+                <div class="info-group">
+                    <div class="info-label">Cidade</div>
+                    <div class="info-value">{{ location_data.city if location_data.city|default(false) else 'Brasília' }}</div>
+                </div>
+                
+                <div class="info-group">
+                    <div class="info-label">CEP</div>
+                    <div class="info-value">{{ location_data.postal_code if location_data.postal_code|default(false) else 'Não disponível' }}</div>
+                </div>
+            </div>
+            
+            <div id="issueMap" class="issue-map"></div>
+        </div>
+    </div>
+
+    <!-- Status e Processamento -->
+    <div class="card issue-status-card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-tasks"></i> Status e Processamento
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="{{ url_for('admin.update_issue_status', issue_code=issue.issue_code) }}" method="post" class="status-form">
+                <div class="form-group">
+                    <label class="form-label">Alterar Status</label>
+                    <select name="status" class="form-select">
+                        <option value="pendente" {% if issue.status == 'pendente' %}selected{% endif %}>Pendente</option>
+                        <option value="em_analise" {% if issue.status == 'em_analise' %}selected{% endif %}>Em Análise</option>
+                        <option value="em_processamento" {% if issue.status == 'em_processamento' %}selected{% endif %}>Em Processamento</option>
+                        <option value="resolvido" {% if issue.status == 'resolvido' %}selected{% endif %}>Resolvido</option>
+                        <option value="cancelado" {% if issue.status == 'cancelado' %}selected{% endif %}>Cancelado</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Atribuir para Órgão</label>
+                    <select name="company" class="form-select">
+                        <option value="">Selecione um órgão</option>
+                        <option value="Terracap" {% if issue.companie == 'Terracap' %}selected{% endif %}>Terracap</option>
+                        <option value="Neoenergia" {% if issue.companie == 'Neoenergia' %}selected{% endif %}>Neoenergia</option>
+                        <option value="SLU" {% if issue.companie == 'SLU' %}selected{% endif %}>SLU</option>
+                        <option value="Caesb" {% if issue.companie == 'Caesb' %}selected{% endif %}>Caesb</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Validação por IA -->
+    <div class="card ai-validation-card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-robot"></i> Validação por IA
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="validation-summary">
+                <div class="validation-status-badge {% if issue.ai_validated %}valid{% else %}invalid{% endif %}">
+                    {% if issue.ai_validated %}
+                        <i class="fas fa-check-circle"></i> Validado pela IA
+                    {% else %}
+                        <i class="fas fa-times-circle"></i> Não validado pela IA
+                    {% endif %}
+                </div>
+                
+                {% if issue.needs_human_review %}
+                <div class="validation-status-badge needs-review">
+                    <i class="fas fa-exclamation-triangle"></i> Requer revisão humana
+                </div>
+                {% endif %}
+            </div>
+            
+            {% if issue.ai_validation_result %}
+            <div class="ai-analysis-section">
+                <div class="info-label">Análise da IA</div>
+                <div class="ai-analysis-content">
+                    {{ issue.ai_validation_result.analysis }}
+                </div>
+                
+                <div class="ai-metrics">
+                    <div class="ai-metric">
+                        <div class="metric-label">Confiança</div>
+                        <div class="metric-value confidence-bar">
+                            <div class="progress">
+                                <div class="progress-bar" style="width: {{ issue.ai_validation_result.confidence * 100 }}%"></div>
+                            </div>
+                            <span>{{ (issue.ai_validation_result.confidence * 100)|int }}%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-metric">
+                        <div class="metric-label">Limiar (Threshold)</div>
+                        <div class="metric-value">{{ (issue.ai_validation_result.threshold * 100)|int }}%</div>
+                    </div>
+                    
+                    <div class="ai-metric">
+                        <div class="metric-label">Correspondência com Descrição</div>
+                        <div class="metric-value">
+                            {% if issue.ai_validation_result.matches_description %}
+                                <span class="badge-success"><i class="fas fa-check"></i> Sim</span>
+                            {% else %}
+                                <span class="badge-danger"><i class="fas fa-times"></i> Não</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="ai-metric">
+                        <div class="metric-label">Categoria Detectada</div>
+                        <div class="metric-value">{{ get_category_name(issue.ai_validation_result.category_id) }}</div>
+                    </div>
+                </div>
+                
+                {% if issue.ai_validation_result.detected_elements %}
+                <div class="detected-elements">
+                    <div class="info-label">Elementos Detectados</div>
+                    <div class="element-tags">
+                        {% for element in issue.ai_validation_result.detected_elements %}
+                            <span class="element-tag">{{ element }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if issue.needs_human_review %}
+                <div class="review-actions">
+                    <div class="info-label">Ações do Revisor</div>
+                    <div class="review-buttons">
+                        <button class="btn btn-success btn-sm">
+                            <i class="fas fa-check"></i> Aprovar Validação
+                        </button>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fas fa-times"></i> Rejeitar Validação
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="no-ai-data">
+                <i class="fas fa-robot"></i>
+                <p>Nenhuma análise de IA disponível</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Fotos -->
+    <div class="card issue-photos-card">
+        <div class="card-header">
+            <div class="card-title">
+                <i class="fas fa-images"></i> Fotos
+            </div>
+        </div>
+        <div class="card-body">
+            {% if issue.photo_filename %}
+            <div class="issue-photo">
+                <a href="{{ url_for('static', filename='uploads/issues/' + issue.photo_filename) }}" target="_blank" class="photo-link">
+                    <img src="{{ url_for('static', filename='uploads/issues/' + issue.photo_filename) }}" alt="Foto da ocorrência" class="photo-thumbnail">
+                    <div class="photo-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <span>Ampliar para análise</span>
+                    </div>
+                </a>
+            </div>
+            {% else %}
+            <div class="no-photos">
+                <i class="fas fa-camera-retro"></i>
+                <p>Nenhuma foto disponível</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Modal para visualização de imagem ampliada -->
+<div id="photoModal" class="photo-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="Imagem ampliada">
+    </div>
+</div>
+
+<style>
+    /* Container principal com largura máxima para evitar estouro horizontal */
+    .page-content {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .issue-detail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        max-width: 100%;
+    }
+    
+    .issue-main-card {
+        grid-column: span 1;
+        grid-row: 1;
+    }
+    
+    .issue-location-card {
+        grid-column: span 1;
+        grid-row: 1;
+    }
+    
+    .issue-status-card {
+        grid-column: span 1;
+        grid-row: 2;
+    }
+    
+    .ai-validation-card {
+        grid-column: span 1;
+        grid-row: 2;
+    }
+    
+    .issue-photos-card {
+        grid-column: span 2;
+        grid-row: 3;
+    }
+    
+    .issue-info-grid,
+    .location-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .info-group {
+        margin-bottom: 0.75rem;
+    }
+    
+    .info-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--gray-500);
+        margin-bottom: 0.25rem;
+    }
+    
+    .info-value {
+        font-size: 1rem;
+        color: var(--gray-800);
+    }
+    
+    .description-box {
+        background-color: var(--gray-50);
+        padding: 1rem;
+        border-radius: 6px;
+        margin-top: 1rem;
+    }
+    
+    .description-content {
+        white-space: pre-line;
+        color: var(--gray-700);
+    }
+    
+    .issue-map {
+        height: 250px;
+        background-color: var(--gray-100);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-500);
+        margin-top: 1rem;
+    }
+    
+    .status-form {
+        margin-bottom: 1rem;
+    }
+    
+    /* Validação por IA */
+    .validation-summary {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+    }
+    
+    .validation-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+    
+    .validation-status-badge.valid {
+        background-color: rgba(22, 163, 74, 0.1);
+        color: var(--success);
+    }
+    
+    .validation-status-badge.invalid {
+        background-color: rgba(220, 38, 38, 0.1);
+        color: var(--danger);
+    }
+    
+    .validation-status-badge.needs-review {
+        background-color: rgba(234, 179, 8, 0.1);
+        color: var(--warning);
+    }
+    
+    .ai-analysis-section {
+        margin-top: 1.5rem;
+    }
+    
+    .ai-analysis-content {
+        background-color: var(--gray-50);
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 1.5rem;
+        color: var(--gray-700);
+    }
+    
+    .ai-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .ai-metric {
+        margin-bottom: 1rem;
+    }
+    
+    .metric-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--gray-500);
+        margin-bottom: 0.25rem;
+    }
+    
+    .metric-value {
+        font-size: 0.95rem;
+        color: var(--gray-800);
+    }
+    
+    .confidence-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .progress {
+        flex: 1;
+        height: 8px;
+        background-color: var(--gray-200);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    
+    .progress-bar {
+        height: 100%;
+        background-color: var(--primary);
+        border-radius: 4px;
+    }
+    
+    .badge-success {
+        color: var(--success);
+        font-weight: 500;
+    }
+    
+    .badge-danger {
+        color: var(--danger);
+        font-weight: 500;
+    }
+    
+    .detected-elements {
+        margin-bottom: 1.5rem;
+    }
+    
+    .element-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+    
+    .element-tag {
+        background-color: var(--gray-200);
+        color: var(--gray-700);
+        padding: 0.35rem 0.75rem;
+        border-radius: 16px;
+        font-size: 0.85rem;
+    }
+    
+    .review-actions {
+        margin-top: 1.5rem;
+    }
+    
+    .review-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    .no-ai-data {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2.5rem 0;
+        color: var(--gray-500);
+    }
+    
+    .no-ai-data i {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+    
+    /* Fotos com zoom */
+    .issue-photo {
+        display: flex;
+        justify-content: center;
+        max-height: 400px;
+        overflow: hidden;
+    }
+    
+    .photo-link {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+        cursor: zoom-in;
+    }
+    
+    .photo-thumbnail {
+        max-width: 100%;
+        max-height: 400px;
+        border-radius: 6px;
+        transition: transform 0.3s ease;
+    }
+    
+    .photo-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 6px;
+    }
+    
+    .photo-overlay i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .photo-link:hover .photo-overlay {
+        opacity: 1;
+    }
+    
+    .photo-link:hover .photo-thumbnail {
+        transform: scale(1.02);
+    }
+    
+    .no-photos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 0;
+        color: var(--gray-500);
+    }
+    
+    .no-photos i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+    
+    /* Modal para ampliação de fotos */
+    .photo-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+    
+    .modal-content {
+        margin: auto;
+        display: block;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 90%;
+        max-height: 90%;
+    }
+    
+    .modal-content img {
+        max-width: 100%;
+        max-height: 90vh;
+    }
+    
+    .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 992px) {
+        .issue-detail-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .issue-main-card,
+        .issue-location-card,
+        .issue-status-card,
+        .ai-validation-card,
+        .issue-photos-card {
+            grid-column: 1;
+        }
+        
+        .issue-main-card {
+            grid-row: 1;
+        }
+        
+        .issue-location-card {
+            grid-row: 2;
+        }
+        
+        .issue-status-card {
+            grid-row: 3;
+        }
+        
+        .ai-validation-card {
+            grid-row: 4;
+        }
+        
+        .issue-photos-card {
+            grid-row: 5;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css" />
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar o mapa
+        try {
+            if (typeof L !== 'undefined') {
+                const map = L.map('issueMap').setView([{{ issue.latitude }}, {{ issue.longitude }}], 15);
+                
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                
+                // Adicionar marcador
+                const marker = L.marker([{{ issue.latitude }}, {{ issue.longitude }}]).addTo(map);
+                marker.bindPopup("{{ issue.issue_code }}").openPopup();
+                
+                // Adicionar popup com informações de localização
+                const locationInfo = "{{ location_data.street if location_data.street|default(false) else 'Localização' }}";
+                marker.bindPopup(locationInfo).openPopup();
+            } else {
+                document.getElementById('issueMap').innerHTML = 'Mapa não disponível';
+            }
+        } catch (e) {
+            console.error('Erro ao inicializar o mapa:', e);
+            document.getElementById('issueMap').innerHTML = 'Erro ao carregar o mapa';
+        }
+        
+        // Configuração do modal de fotos
+        const modal = document.getElementById("photoModal");
+        const modalImg = document.getElementById("modalImage");
+        const photoLinks = document.querySelectorAll(".photo-link");
+        const closeModal = document.querySelector(".close-modal");
+        
+        photoLinks.forEach(link => {
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                modal.style.display = "block";
+                modalImg.src = this.href;
+            });
+        });
+        
+        closeModal.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+        
+        // Fechar modal ao clicar fora da imagem
+        modal.addEventListener("click", function(e) {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    });
+</script>
+{% endblock %}

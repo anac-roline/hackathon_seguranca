@@ -1,0 +1,631 @@
+{% extends "base.html" %}
+
+{% block title %}Minhas Ocorrências{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-header-content">
+        <h1>Minhas Ocorrências</h1>
+        <p>Acompanhe o status de todos os problemas que você reportou</p>
+    </div>
+    <div class="page-header-actions">
+        <a href="{{ url_for('main.report_issue') }}" class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i> Nova Ocorrência
+        </a>
+    </div>
+</div>
+
+<div class="reports-container">
+    <div class="reports-filter">
+        <div class="filter-group">
+            <label for="filter-status">Status</label>
+            <select id="filter-status" class="form-control">
+                <option value="all">Todos</option>
+                <option value="pending">Pendentes</option>
+                <option value="processing">Em Processamento</option>
+                <option value="resolved">Resolvidos</option>
+                <option value="rejected">Rejeitados</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="filter-category">Categoria</label>
+            <select id="filter-category" class="form-control">
+                <option value="all">Todas</option>
+                <option value="iluminacao">Iluminação Pública</option>
+                <option value="buraco">Buracos na Via</option>
+                <option value="lixo">Lixo Acumulado</option>
+                <option value="inundacao">Risco de Inundação</option>
+                <option value="calcada">Calçada Danificada</option>
+                <option value="arvore">Árvore com Risco</option>
+                <option value="transito">Sinalização de Trânsito</option>
+                <option value="outro">Outros</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="filter-date">Data</label>
+            <select id="filter-date" class="form-control">
+                <option value="all">Qualquer data</option>
+                <option value="today">Hoje</option>
+                <option value="week">Esta semana</option>
+                <option value="month">Este mês</option>
+                <option value="year">Este ano</option>
+            </select>
+        </div>
+
+        <div class="filter-group search-group">
+            <label for="search">Buscar</label>
+            <div class="search-input">
+                <input type="text" id="search" class="form-control" placeholder="Buscar por título ou protocolo...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="reports-summary">
+        <div class="summary-item">
+            <div class="summary-value">12</div>
+            <div class="summary-label">Total</div>
+        </div>
+        <div class="summary-item">
+            <div class="summary-value">3</div>
+            <div class="summary-label">Pendentes</div>
+        </div>
+        <div class="summary-item">
+            <div class="summary-value">5</div>
+            <div class="summary-label">Em Processamento</div>
+        </div>
+        <div class="summary-item">
+            <div class="summary-value">4</div>
+            <div class="summary-label">Resolvidos</div>
+        </div>
+    </div>
+
+    <div class="reports-list">
+        <!-- Ocorrência 1 - Pendente -->
+        <div class="report-card">
+            <div class="report-status pending">
+                <i class="fas fa-clock"></i>
+                <span>Pendente</span>
+            </div>
+
+            <div class="report-header">
+                <div class="report-category">
+                    <i class="fas fa-lightbulb"></i> Iluminação Pública
+                </div>
+                <div class="report-date">
+                    <i class="fas fa-calendar-alt"></i> 18/06/2025
+                </div>
+            </div>
+
+            <div class="report-body">
+                <h3 class="report-title">Poste sem iluminação na Quadra 8</h3>
+                <p class="report-description">Poste de iluminação pública sem funcionamento há três dias, deixando o local escuro durante a noite.</p>
+                <div class="report-location">
+                    <i class="fas fa-map-marker-alt"></i> Quadra 8, Conjunto 12, Lote 5 - Asa Norte
+                </div>
+            </div>
+
+            <div class="report-footer">
+                <div class="report-protocol">Protocolo: #CDF-202506-0023</div>
+                <div class="report-actions">
+                    <a href="#" class="btn-action">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="#" class="btn-action">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ocorrência 2 - Em Processamento -->
+        <div class="report-card">
+            <div class="report-status processing">
+                <i class="fas fa-cog"></i>
+                <span>Em Processamento</span>
+            </div>
+
+            <div class="report-header">
+                <div class="report-category">
+                    <i class="fas fa-road"></i> Buracos na Via
+                </div>
+                <div class="report-date">
+                    <i class="fas fa-calendar-alt"></i> 15/06/2025
+                </div>
+            </div>
+
+            <div class="report-body">
+                <h3 class="report-title">Buraco grande na via principal</h3>
+                <p class="report-description">Buraco de aproximadamente 50cm de diâmetro causando risco de acidentes e danos aos veículos.</p>
+                <div class="report-location">
+                    <i class="fas fa-map-marker-alt"></i> Avenida das Araucárias, próximo ao número 1250 - Águas Claras
+                </div>
+            </div>
+
+            <div class="report-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">15/06/2025 - 14:30</div>
+                        <div class="timeline-text">Ocorrência registrada</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">16/06/2025 - 09:15</div>
+                        <div class="timeline-text">Ocorrência verificada e classificada</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">16/06/2025 - 10:45</div>
+                        <div class="timeline-text">Encaminhada para Secretaria de Obras</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">17/06/2025 - 08:30</div>
+                        <div class="timeline-text">Equipe designada para reparo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-footer">
+                <div class="report-protocol">Protocolo: #CDF-202506-0018</div>
+                <div class="report-actions">
+                    <a href="#" class="btn-action">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ocorrência 3 - Resolvida -->
+        <div class="report-card">
+            <div class="report-status resolved">
+                <i class="fas fa-check-circle"></i>
+                <span>Resolvido</span>
+            </div>
+
+            <div class="report-header">
+                <div class="report-category">
+                    <i class="fas fa-trash"></i> Lixo Acumulado
+                </div>
+                <div class="report-date">
+                    <i class="fas fa-calendar-alt"></i> 10/06/2025
+                </div>
+            </div>
+
+            <div class="report-body">
+                <h3 class="report-title">Lixo acumulado em área verde</h3>
+                <p class="report-description">Grande quantidade de lixo e entulho acumulado em área verde, causando mau cheiro e risco de proliferação de pragas.</p>
+                <div class="report-location">
+                    <i class="fas fa-map-marker-alt"></i> Área verde entre Quadras 14 e 15 - Sobradinho
+                </div>
+            </div>
+
+            <div class="report-resolved">
+                <div class="resolved-date">
+                    <i class="fas fa-calendar-check"></i> Resolvido em: 14/06/2025
+                </div>
+                <div class="resolved-time">
+                    <i class="fas fa-clock"></i> Tempo de resolução: 4 dias
+                </div>
+
+                <div class="before-after">
+                    <div class="before-after-item">
+                        <div class="before-after-label">Antes</div>
+                        <div class="before-after-image before"></div>
+                    </div>
+                    <div class="before-after-item">
+                        <div class="before-after-label">Depois</div>
+                        <div class="before-after-image after"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-footer">
+                <div class="report-protocol">Protocolo: #CDF-202506-0010</div>
+                <div class="report-actions">
+                    <a href="#" class="btn-action">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <a href="#" class="pagination-item disabled">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <a href="#" class="pagination-item active">1</a>
+        <a href="#" class="pagination-item">2</a>
+        <a href="#" class="pagination-item">3</a>
+        <a href="#" class="pagination-item">
+            <i class="fas fa-chevron-right"></i>
+        </a>
+    </div>
+</div>
+
+<style>
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .page-header h1 {
+        color: var(--gray-800);
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+        color: var(--gray-600);
+    }
+
+    .reports-container {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .reports-filter {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+        padding: 1.5rem;
+        background-color: var(--gray-50);
+        border-bottom: 1px solid var(--gray-200);
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-group label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--gray-700);
+        margin-bottom: 0.5rem;
+    }
+
+    .search-group {
+        grid-column: 1 / -1;
+    }
+
+    .search-input {
+        position: relative;
+    }
+
+    .search-input input {
+        padding-right: 2.5rem;
+    }
+
+    .search-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 2.5rem;
+        background-color: transparent;
+        border: none;
+        color: var(--gray-500);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .reports-summary {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background-color: var(--gray-200);
+    }
+
+    .summary-item {
+        background-color: white;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .summary-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+    }
+
+    .summary-label {
+        font-size: 0.9rem;
+        color: var(--gray-600);
+    }
+
+    .reports-list {
+        padding: 1.5rem;
+    }
+
+    .report-card {
+        position: relative;
+        border: 1px solid var(--gray-200);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .report-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .report-status {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .report-status.pending {
+        background-color: rgba(245, 158, 11, 0.1);
+        color: #b45309;
+    }
+
+    .report-status.processing {
+        background-color: rgba(37, 99, 235, 0.1);
+        color: #1e40af;
+    }
+
+    .report-status.resolved {
+        background-color: rgba(22, 163, 74, 0.1);
+        color: #166534;
+    }
+
+    .report-status.rejected {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: #b91c1c;
+    }
+
+    .report-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        background-color: var(--gray-50);
+        border-bottom: 1px solid var(--gray-200);
+    }
+
+    .report-category, .report-date {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--gray-600);
+    }
+
+    .report-body {
+        padding: 1.25rem;
+    }
+
+    .report-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--gray-800);
+        margin-bottom: 0.75rem;
+    }
+
+    .report-description {
+        color: var(--gray-600);
+        margin-bottom: 1rem;
+    }
+
+    .report-location {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--gray-600);
+        font-size: 0.95rem;
+    }
+
+    .report-timeline {
+        padding: 0 1.25rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .timeline-item {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .timeline-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .timeline-date {
+        font-size: 0.85rem;
+        color: var(--gray-500);
+        margin-bottom: 0.25rem;
+    }
+
+    .timeline-text {
+        color: var(--gray-700);
+        font-size: 0.95rem;
+    }
+
+    .report-resolved {
+        padding: 0 1.25rem 1.25rem;
+    }
+
+    .resolved-date, .resolved-time {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--gray-600);
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .before-after {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .before-after-item {
+        flex: 1;
+    }
+
+    .before-after-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--gray-600);
+        margin-bottom: 0.5rem;
+    }
+
+    .before-after-image {
+        height: 150px;
+        border-radius: 6px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .before-after-image.before {
+        background-color: var(--gray-200);
+    }
+
+    .before-after-image.after {
+        background-color: var(--gray-100);
+    }
+
+    .report-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1.25rem;
+        background-color: var(--gray-50);
+        border-top: 1px solid var(--gray-200);
+    }
+
+    .report-protocol {
+        font-size: 0.9rem;
+        color: var(--gray-500);
+        font-weight: 500;
+    }
+
+    .report-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .btn-action {
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        background-color: white;
+        border: 1px solid var(--gray-300);
+        color: var(--gray-600);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .btn-action:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1.5rem;
+        border-top: 1px solid var(--gray-200);
+    }
+
+    .pagination-item {
+        width: 36px;
+        height: 36px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border: 1px solid var(--gray-300);
+        color: var(--gray-600);
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .pagination-item:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+        text-decoration: none;
+    }
+
+    .pagination-item.active {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: white;
+    }
+
+    .pagination-item.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+        .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .reports-summary {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .before-after {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
