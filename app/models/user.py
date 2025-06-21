@@ -2,6 +2,7 @@
 import enum
 from app import db # Supondo que 'db' seja sua instância do SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 # 1. Defina os papéis usando a classe Enum do Python para maior segurança e clareza
 class UserRole(enum.Enum):
@@ -10,7 +11,7 @@ class UserRole(enum.Enum):
     ANALISTA = 'analista'     # Usuário que pode visualizar e analisar os dados
 
 # 2. Atualize seu modelo de Usuário
-class User(db.Model):
+class User(UserMixin, db.Model):
     """Modelo de usuário para o banco de dados com papéis e gerenciamento de senha."""
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
