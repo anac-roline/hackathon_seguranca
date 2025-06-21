@@ -49,7 +49,14 @@ def login():
         # Verifica se o usuário existe e a senha está correta
         if user and check_password_hash(user.password_hash, password):
             
-            response = make_response(redirect(url_for('main.dashboard')))
+            if user.is_analista:
+                response = make_response(redirect(url_for('admin.index')))
+                flash('Login realizado com sucesso! Você é um analista.', 'success')
+            else:
+                response = make_response(redirect(url_for('main.dashboard')))
+                flash('Login realizado com sucesso! Você é um usuário comum.', 'success')
+            
+
             response.set_cookie("username", str(user.username), max_age=60*60*24) # Expira em 1 dia
             response.set_cookie("is_analista", str(user.is_analista), max_age=60*60*24)
             response.set_cookie("id", str(user.id), max_age=60*60*24)

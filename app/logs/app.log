@@ -350,3 +350,250 @@ OPENAPI_API_KEY
 2025-06-21 06:32:49,806 [INFO] - Encontradas 6 ocorrências para o usuário 1
 2025-06-21 06:32:50,490 [INFO] - Encontradas 6 ocorrências para o usuário 1
 2025-06-21 06:32:50,863 [INFO] - Encontradas 6 ocorrências para o usuário 1
+2025-06-21 08:42:50,040 [INFO] - Encontradas 2 ocorrências para o usuário 1
+2025-06-21 09:50:34,972 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:00:04,211 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:00:48,098 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:03:10,305 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:03:11,505 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:03:12,188 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:03:30,923 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:03:31,970 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:03:41,634 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:03:59,806 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:00,871 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:14,480 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:15,147 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:17,180 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:17,389 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:43,541 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:44,802 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:44,979 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:51,626 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:04:59,971 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:05:00,768 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:05:08,351 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:05:18,353 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:05:19,408 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:05:19,564 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:05:19,722 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:15:51,920 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-21 11:16:35,095 [INFO] - Iniciando processamento de nova ocorrência para usuário 2
+2025-06-21 11:16:35,100 [INFO] - Código gerado: CDF-2506-0004
+2025-06-21 11:16:35,100 [INFO] - Processando foto: TCL.jpg
+2025-06-21 11:16:35,102 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0004.jpg
+2025-06-21 11:16:35,103 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0004
+2025-06-21 11:16:35,168 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0004.jpg (categoria: 3)
+2025-06-21 11:16:35,169 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:16:38,859 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:16:38,860 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1ficos", "distribui\u00e7\u00e3o normal", "setas"], "analysis": "A imagem apresenta gr\u00e1ficos e uma representa\u00e7\u00e3o de distribui\u00e7\u00e3o normal, que n\u00e3o est\u00e1 relacionada a problemas de coleta de lixo.", "needs_human_review": false, "category_id": 3, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:16:38,860 [INFO] - Análise de IA concluída para CDF-2506-0004: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1ficos", "distribui\u00e7\u00e3o normal", "setas"], "analysis": "A imagem apresenta gr\u00e1ficos e uma representa\u00e7\u00e3o de distribui\u00e7\u00e3o normal, que n\u00e3o est\u00e1 relacionada a problemas de coleta de lixo.", "needs_human_review": false, "category_id": 3, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:16:38,861 [WARNING] - Ocorrência CDF-2506-0004 marcada para revisão humana
+2025-06-21 11:16:38,884 [INFO] - Ocorrência CDF-2506-0004 salva com sucesso no banco de dados
+2025-06-21 11:16:38,885 [INFO] - Histórico salvo em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0004_history.json
+2025-06-21 11:24:49,839 [INFO] - Iniciando processamento de nova ocorrência para usuário 2
+2025-06-21 11:24:49,858 [INFO] - Código gerado: CDF-2506-0005
+2025-06-21 11:24:49,859 [INFO] - Processando foto: TCL.jpg
+2025-06-21 11:24:49,860 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0005.jpg
+2025-06-21 11:24:49,862 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0005
+2025-06-21 11:24:49,916 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0005.jpg (categoria: 3)
+2025-06-21 11:24:49,917 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:25:10,408 [INFO] - Iniciando processamento de nova ocorrência para usuário 2
+2025-06-21 11:25:10,448 [INFO] - Código gerado: CDF-2506-0005
+2025-06-21 11:25:10,448 [INFO] - Processando foto: TCL.jpg
+2025-06-21 11:25:10,449 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0005.jpg
+2025-06-21 11:25:10,450 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0005
+2025-06-21 11:25:10,503 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0005.jpg (categoria: 1)
+2025-06-21 11:25:10,504 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:25:14,211 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:25:14,211 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1ficos", "curva de distribui\u00e7\u00e3o"], "analysis": "A imagem mostra gr\u00e1ficos e uma curva de distribui\u00e7\u00e3o, sem rela\u00e7\u00e3o com infraestruturas urbanas ou vias p\u00fablicas.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:25:14,211 [INFO] - Análise de IA concluída para CDF-2506-0005: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1ficos", "curva de distribui\u00e7\u00e3o"], "analysis": "A imagem mostra gr\u00e1ficos e uma curva de distribui\u00e7\u00e3o, sem rela\u00e7\u00e3o com infraestruturas urbanas ou vias p\u00fablicas.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:25:14,211 [WARNING] - Ocorrência CDF-2506-0005 marcada para revisão humana
+2025-06-21 11:25:14,228 [INFO] - Ocorrência CDF-2506-0005 salva com sucesso no banco de dados
+2025-06-21 11:25:14,228 [ERROR] - Erro ao processar ocorrência: 'Settings' object has no attribute 'get'
+2025-06-21 11:26:00,053 [INFO] - Iniciando processamento de nova ocorrência para usuário 2
+2025-06-21 11:26:00,072 [INFO] - Código gerado: CDF-2506-0006
+2025-06-21 11:26:00,073 [INFO] - Processando foto: TCL.jpg
+2025-06-21 11:26:00,077 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0006.jpg
+2025-06-21 11:26:00,080 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0006
+2025-06-21 11:26:00,127 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0006.jpg (categoria: 1)
+2025-06-21 11:26:00,127 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:26:04,564 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:26:04,564 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1fico", "curva de distribui\u00e7\u00e3o", "histogramas"], "analysis": "A imagem mostra elementos gr\u00e1ficos relacionados a um gr\u00e1fico de distribui\u00e7\u00e3o, sem sinais de danos ou deteriora\u00e7\u00e3o em vias p\u00fablicas.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:26:04,565 [INFO] - Análise de IA concluída para CDF-2506-0006: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1fico", "curva de distribui\u00e7\u00e3o", "histogramas"], "analysis": "A imagem mostra elementos gr\u00e1ficos relacionados a um gr\u00e1fico de distribui\u00e7\u00e3o, sem sinais de danos ou deteriora\u00e7\u00e3o em vias p\u00fablicas.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:26:04,565 [WARNING] - Ocorrência CDF-2506-0006 marcada para revisão humana
+2025-06-21 11:26:04,657 [INFO] - Ocorrência CDF-2506-0006 salva com sucesso no banco de dados
+2025-06-21 11:26:04,658 [ERROR] - Erro ao processar ocorrência: 'list' object has no attribute 'get'
+2025-06-21 11:33:43,568 [INFO] - Iniciando processamento de nova ocorrência para usuário 2
+2025-06-21 11:33:43,599 [INFO] - Código gerado: CDF-2506-0007
+2025-06-21 11:33:43,600 [INFO] - Processando foto: TCL.jpg
+2025-06-21 11:33:43,601 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0007.jpg
+2025-06-21 11:33:43,606 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0007
+2025-06-21 11:33:43,722 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0007.jpg (categoria: 2)
+2025-06-21 11:33:43,723 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:33:47,862 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:33:47,862 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": [], "analysis": "A imagem mostra gr\u00e1ficos estat\u00edsticos e n\u00e3o est\u00e1 relacionada a problemas de ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:33:47,863 [INFO] - Análise de IA concluída para CDF-2506-0007: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": [], "analysis": "A imagem mostra gr\u00e1ficos estat\u00edsticos e n\u00e3o est\u00e1 relacionada a problemas de ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:33:47,863 [WARNING] - Ocorrência CDF-2506-0007 marcada para revisão humana
+2025-06-21 11:33:47,881 [INFO] - Ocorrência CDF-2506-0007 salva com sucesso no banco de dados
+2025-06-21 11:33:47,881 [INFO] - Histórico salvo em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0007_history.json
+2025-06-21 11:33:47,906 [INFO] - Encontradas 5 ocorrências para o usuário 2
+2025-06-21 11:38:54,457 [INFO] - Encontradas 5 ocorrências para o usuário 2
+2025-06-21 11:39:23,599 [INFO] - Iniciando processamento de nova ocorrência para usuário 2
+2025-06-21 11:39:23,604 [INFO] - Código gerado: CDF-2506-0008
+2025-06-21 11:39:23,604 [INFO] - Processando foto: TCL.jpg
+2025-06-21 11:39:23,605 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0008.jpg
+2025-06-21 11:39:23,605 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0008
+2025-06-21 11:39:23,653 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0008.jpg (categoria: 2)
+2025-06-21 11:39:23,654 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:39:26,879 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:39:26,879 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1ficos", "setas"], "analysis": "A imagem mostra gr\u00e1ficos estat\u00edsticos e setas, sem elementos relacionados a ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:39:26,880 [INFO] - Análise de IA concluída para CDF-2506-0008: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1ficos", "setas"], "analysis": "A imagem mostra gr\u00e1ficos estat\u00edsticos e setas, sem elementos relacionados a ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:39:26,880 [WARNING] - Ocorrência CDF-2506-0008 marcada para revisão humana
+2025-06-21 11:39:26,897 [INFO] - Ocorrência CDF-2506-0008 salva com sucesso no banco de dados
+2025-06-21 11:39:26,898 [INFO] - Histórico salvo em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0008_history.json
+2025-06-21 11:39:26,918 [INFO] - Encontradas 6 ocorrências para o usuário 2
+2025-06-21 11:42:13,914 [INFO] - Encontradas 6 ocorrências para o usuário 2
+2025-06-21 11:42:33,029 [INFO] - Iniciando processamento de nova ocorrência para usuário 2
+2025-06-21 11:42:33,034 [INFO] - Código gerado: CDF-2506-0009
+2025-06-21 11:42:33,035 [INFO] - Processando foto: TCL.jpg
+2025-06-21 11:42:33,035 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0009.jpg
+2025-06-21 11:42:33,036 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0009
+2025-06-21 11:42:33,094 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0009.jpg (categoria: 2)
+2025-06-21 11:42:33,094 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:42:37,393 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:42:37,394 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1fico", "histograma", "setas"], "analysis": "A imagem mostra gr\u00e1ficos e diagramas, n\u00e3o relacionados a ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:42:37,395 [INFO] - Análise de IA concluída para CDF-2506-0009: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["gr\u00e1fico", "histograma", "setas"], "analysis": "A imagem mostra gr\u00e1ficos e diagramas, n\u00e3o relacionados a ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:42:37,395 [WARNING] - Ocorrência CDF-2506-0009 marcada para revisão humana
+2025-06-21 11:42:37,416 [INFO] - Ocorrência CDF-2506-0009 salva com sucesso no banco de dados
+2025-06-21 11:42:37,416 [INFO] - Histórico salvo em: app/integrations/organização_history.json
+2025-06-21 11:42:52,352 [INFO] - Encontradas 7 ocorrências para o usuário 2
+2025-06-21 11:43:23,152 [INFO] - Encontradas 7 ocorrências para o usuário 2
+2025-06-21 11:49:20,744 [INFO] - Encontradas 7 ocorrências para o usuário 2
+2025-06-21 11:50:27,741 [INFO] - Encontradas 7 ocorrências para o usuário 2
+2025-06-21 11:50:48,848 [INFO] - Encontradas 7 ocorrências para o usuário 2
+2025-06-21 11:51:38,253 [INFO] - Encontradas 0 ocorrências para o usuário 4
+2025-06-21 11:52:14,014 [INFO] - Encontradas 0 ocorrências para o usuário 4
+2025-06-21 11:52:23,679 [INFO] - Encontradas 0 ocorrências para o usuário 4
+2025-06-21 11:53:34,391 [INFO] - Iniciando processamento de nova ocorrência para usuário 4
+2025-06-21 11:53:34,397 [INFO] - Código gerado: CDF-2506-0010
+2025-06-21 11:53:34,398 [INFO] - Processando foto: misto-peito-de-peru-e.jpg
+2025-06-21 11:53:34,398 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0010.jpg
+2025-06-21 11:53:34,400 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0010
+2025-06-21 11:53:34,512 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0010.jpg (categoria: 2)
+2025-06-21 11:53:34,514 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:53:39,866 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:53:39,866 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, n\u00e3o apresenta elementos de ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:53:39,867 [INFO] - Análise de IA concluída para CDF-2506-0010: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, n\u00e3o apresenta elementos de ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:53:39,867 [WARNING] - Ocorrência CDF-2506-0010 marcada para revisão humana
+2025-06-21 11:53:39,883 [INFO] - Ocorrência CDF-2506-0010 salva com sucesso no banco de dados
+2025-06-21 11:53:39,884 [INFO] - Histórico salvo em: app/integrations/organização_history.json
+2025-06-21 11:53:39,897 [INFO] - Encontradas 1 ocorrências para o usuário 4
+2025-06-21 11:56:16,393 [INFO] - Encontradas 1 ocorrências para o usuário 4
+2025-06-21 11:56:39,969 [INFO] - Iniciando processamento de nova ocorrência para usuário 4
+2025-06-21 11:56:39,974 [INFO] - Código gerado: CDF-2506-0011
+2025-06-21 11:56:39,974 [INFO] - Processando foto: misto-peito-de-peru-e.jpg
+2025-06-21 11:56:39,976 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0011.jpg
+2025-06-21 11:56:39,977 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0011
+2025-06-21 11:56:40,039 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0011.jpg (categoria: 2)
+2025-06-21 11:56:40,040 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:56:44,579 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:56:44,579 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, n\u00e3o est\u00e1 relacionada a problemas de ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:56:44,579 [INFO] - Análise de IA concluída para CDF-2506-0011: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, n\u00e3o est\u00e1 relacionada a problemas de ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 11:56:44,579 [WARNING] - Ocorrência CDF-2506-0011 marcada para revisão humana
+2025-06-21 11:56:44,639 [INFO] - Ocorrência CDF-2506-0011 salva com sucesso no banco de dados
+2025-06-21 11:56:44,640 [ERROR] - Erro ao processar ocorrência: 'dict' object has no attribute 'append'
+2025-06-21 11:58:15,900 [INFO] - Iniciando processamento de nova ocorrência para usuário 4
+2025-06-21 11:58:15,917 [INFO] - Código gerado: CDF-2506-0012
+2025-06-21 11:58:15,919 [INFO] - Processando foto: misto-peito-de-peru-e.jpg
+2025-06-21 11:58:15,920 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0012.jpg
+2025-06-21 11:58:15,921 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0012
+2025-06-21 11:58:16,073 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0012.jpg (categoria: 1)
+2025-06-21 11:58:16,074 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:58:20,617 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:58:20,618 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, n\u00e3o uma via p\u00fablica com buracos ou deteriora\u00e7\u00e3o.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:58:20,618 [INFO] - Análise de IA concluída para CDF-2506-0012: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, n\u00e3o uma via p\u00fablica com buracos ou deteriora\u00e7\u00e3o.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:58:20,618 [WARNING] - Ocorrência CDF-2506-0012 marcada para revisão humana
+2025-06-21 11:58:20,637 [INFO] - Ocorrência CDF-2506-0012 salva com sucesso no banco de dados
+2025-06-21 11:58:20,655 [INFO] - Encontradas 3 ocorrências para o usuário 4
+2025-06-21 11:58:51,808 [INFO] - Iniciando processamento de nova ocorrência para usuário 4
+2025-06-21 11:58:51,812 [INFO] - Código gerado: CDF-2506-0013
+2025-06-21 11:58:51,812 [INFO] - Processando foto: misto-peito-de-peru-e.jpg
+2025-06-21 11:58:51,812 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0013.jpg
+2025-06-21 11:58:51,813 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0013
+2025-06-21 11:58:51,838 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0013.jpg (categoria: 1)
+2025-06-21 11:58:51,840 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 11:58:54,730 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 11:58:54,730 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, sem relev\u00e2ncia para a an\u00e1lise de vias p\u00fablicas.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:58:54,731 [INFO] - Análise de IA concluída para CDF-2506-0013: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, sem relev\u00e2ncia para a an\u00e1lise de vias p\u00fablicas.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 11:58:54,731 [WARNING] - Ocorrência CDF-2506-0013 marcada para revisão humana
+2025-06-21 11:58:54,750 [INFO] - Ocorrência CDF-2506-0013 salva com sucesso no banco de dados
+2025-06-21 11:58:54,760 [INFO] - Encontradas 4 ocorrências para o usuário 4
+2025-06-21 12:06:05,276 [INFO] - Encontradas 4 ocorrências para o usuário 4
+2025-06-21 12:06:16,182 [INFO] - Iniciando processamento de nova ocorrência para usuário 4
+2025-06-21 12:06:16,187 [INFO] - Código gerado: CDF-2506-0014
+2025-06-21 12:06:16,188 [INFO] - Processando foto: misto-peito-de-peru-e.jpg
+2025-06-21 12:06:16,188 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0014.jpg
+2025-06-21 12:06:16,190 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0014
+2025-06-21 12:06:16,236 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0014.jpg (categoria: 3)
+2025-06-21 12:06:16,237 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 12:06:39,985 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 12:06:39,985 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 0.95, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato e n\u00e3o est\u00e1 relacionada a problemas de coleta de lixo.", "needs_human_review": false, "category_id": 3, "threshold": 0.7, "needs_review": true}
+2025-06-21 12:06:39,985 [INFO] - Análise de IA concluída para CDF-2506-0014: {"valid": false, "confidence": 0.95, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato e n\u00e3o est\u00e1 relacionada a problemas de coleta de lixo.", "needs_human_review": false, "category_id": 3, "threshold": 0.7, "needs_review": true}
+2025-06-21 12:06:39,985 [WARNING] - Ocorrência CDF-2506-0014 marcada para revisão humana
+2025-06-21 12:06:40,008 [INFO] - Ocorrência CDF-2506-0014 salva com sucesso no banco de dados
+2025-06-21 12:08:59,077 [INFO] - Iniciando processamento de nova ocorrência para usuário 4
+2025-06-21 12:08:59,096 [INFO] - Código gerado: CDF-2506-0015
+2025-06-21 12:08:59,096 [INFO] - Processando foto: misto-peito-de-peru-e.jpg
+2025-06-21 12:08:59,097 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0015.jpg
+2025-06-21 12:08:59,099 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0015
+2025-06-21 12:08:59,165 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0015.jpg (categoria: 3)
+2025-06-21 12:08:59,166 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 12:09:03,734 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 12:09:03,735 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato e n\u00e3o apresenta nenhum problema relacionado \u00e0 coleta de lixo.", "needs_human_review": false, "category_id": 3, "threshold": 0.7, "needs_review": true}
+2025-06-21 12:09:03,735 [INFO] - Análise de IA concluída para CDF-2506-0015: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato e n\u00e3o apresenta nenhum problema relacionado \u00e0 coleta de lixo.", "needs_human_review": false, "category_id": 3, "threshold": 0.7, "needs_review": true}
+2025-06-21 12:09:03,736 [WARNING] - Ocorrência CDF-2506-0015 marcada para revisão humana
+2025-06-21 12:09:03,755 [INFO] - Ocorrência CDF-2506-0015 salva com sucesso no banco de dados
+2025-06-21 12:09:03,755 [ERROR] - Erro ao processar ocorrência: name 'dict_company' is not defined
+2025-06-21 12:09:30,296 [INFO] - Iniciando processamento de nova ocorrência para usuário 4
+2025-06-21 12:09:30,301 [INFO] - Código gerado: CDF-2506-0016
+2025-06-21 12:09:30,302 [INFO] - Processando foto: misto-peito-de-peru-e.jpg
+2025-06-21 12:09:30,303 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0016.jpg
+2025-06-21 12:09:30,304 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0016
+2025-06-21 12:09:30,343 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0016.jpg (categoria: 2)
+2025-06-21 12:09:30,344 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 12:09:33,359 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 12:09:33,359 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, n\u00e3o relacionados a ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 12:09:33,359 [INFO] - Análise de IA concluída para CDF-2506-0016: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, n\u00e3o relacionados a ilumina\u00e7\u00e3o p\u00fablica.", "needs_human_review": false, "category_id": 2, "threshold": 0.65, "needs_review": true}
+2025-06-21 12:09:33,359 [WARNING] - Ocorrência CDF-2506-0016 marcada para revisão humana
+2025-06-21 12:09:33,377 [INFO] - Ocorrência CDF-2506-0016 salva com sucesso no banco de dados
+2025-06-21 12:09:33,377 [ERROR] - Erro ao processar ocorrência: name 'dict_company' is not defined
+2025-06-21 12:10:13,849 [INFO] - Encontradas 7 ocorrências para o usuário 4
+2025-06-21 12:10:25,212 [INFO] - Iniciando processamento de nova ocorrência para usuário 4
+2025-06-21 12:10:25,216 [INFO] - Código gerado: CDF-2506-0017
+2025-06-21 12:10:25,216 [INFO] - Processando foto: misto-peito-de-peru-e.jpg
+2025-06-21 12:10:25,217 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0017.jpg
+2025-06-21 12:10:25,218 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0017
+2025-06-21 12:10:25,261 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0017.jpg (categoria: 4)
+2025-06-21 12:10:25,262 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 12:10:29,340 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 12:10:29,340 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, sem rela\u00e7\u00e3o com problemas de \u00e1gua ou esgoto.", "needs_human_review": false, "category_id": 4, "threshold": 0.7, "needs_review": true}
+2025-06-21 12:10:29,340 [INFO] - Análise de IA concluída para CDF-2506-0017: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, sem rela\u00e7\u00e3o com problemas de \u00e1gua ou esgoto.", "needs_human_review": false, "category_id": 4, "threshold": 0.7, "needs_review": true}
+2025-06-21 12:10:29,341 [WARNING] - Ocorrência CDF-2506-0017 marcada para revisão humana
+2025-06-21 12:10:29,357 [INFO] - Ocorrência CDF-2506-0017 salva com sucesso no banco de dados
+2025-06-21 12:10:29,357 [ERROR] - Erro ao processar ocorrência: [Errno 2] No such file or directory: 'app/integrations/organização_history.json'
+2025-06-21 12:12:33,871 [INFO] - Encontradas 8 ocorrências para o usuário 4
+2025-06-21 12:13:01,011 [INFO] - Iniciando processamento de nova ocorrência para usuário 4
+2025-06-21 12:13:01,017 [INFO] - Código gerado: CDF-2506-0018
+2025-06-21 12:13:01,017 [INFO] - Processando foto: misto-peito-de-peru-e.jpg
+2025-06-21 12:13:01,018 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0018.jpg
+2025-06-21 12:13:01,020 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0018
+2025-06-21 12:13:01,071 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0018.jpg (categoria: 4)
+2025-06-21 12:13:01,072 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 12:13:04,695 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 12:13:04,695 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, sem rela\u00e7\u00e3o com problemas de \u00e1gua ou esgoto.", "needs_human_review": false, "category_id": 4, "threshold": 0.7, "needs_review": true}
+2025-06-21 12:13:04,696 [INFO] - Análise de IA concluída para CDF-2506-0018: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": ["sandu\u00edche", "prato"], "analysis": "A imagem mostra um sandu\u00edche em um prato, sem rela\u00e7\u00e3o com problemas de \u00e1gua ou esgoto.", "needs_human_review": false, "category_id": 4, "threshold": 0.7, "needs_review": true}
+2025-06-21 12:13:04,696 [WARNING] - Ocorrência CDF-2506-0018 marcada para revisão humana
+2025-06-21 12:13:04,711 [INFO] - Ocorrência CDF-2506-0018 salva com sucesso no banco de dados
+2025-06-21 12:13:04,712 [INFO] - Histórico salvo em: app/integrations/organização_history.json
+2025-06-21 12:13:04,727 [INFO] - Encontradas 9 ocorrências para o usuário 4

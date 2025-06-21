@@ -23,6 +23,6 @@ def create_admin(db):
         admin_user.set_password(ADMIN_PASSWORD)
         db.session.add(admin_user)
         db.session.commit()
-        click.echo(f"Usuário administrador '{ADMIN_USERNAME}' criado com sucesso.")
+        # click.echo(f"Usuário administrador '{ADMIN_USERNAME}' criado com sucesso.")
     else:
         click.echo(f"Usuário administrador '{ADMIN_USERNAME}' já existe.")

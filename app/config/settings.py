@@ -19,4 +19,4 @@ class Settings(BaseSettings):
         {"id": 2, "name": "Neoenergia"},
         {"id": 3, "name": "SLU"},
         {"id": 4, "name": "Caesb"},
-    ]   
+    ]

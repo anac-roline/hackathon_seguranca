@@ -53,6 +53,7 @@ content %}
     <div id="issuesMap" class="issues-map-container"></div>
   </div>
 
+
   <!-- Atividade Recente -->
   <div class="dashboard-card">
     <div class="card-header">
@@ -954,11 +955,11 @@ content %}
               map.fitBounds(markerGroup.getBounds(), { padding: [50, 50] });
           } else {
               // Se não houver marcadores, centralizar em São Paulo
-              map.setView([-23.550520, -46.633308], 12);
+              map.setView([-15.7835816071744 -47.899209408080765], 12);
           }
       } else {
           // Se não houver ocorrências, centralizar em São Paulo
-          map.setView([-23.550520, -46.633308], 12);
+          map.setView([-15.7835816071744, -47.899209408080765], 12);
       }
 
       // Evento para expandir/contrair o mapa

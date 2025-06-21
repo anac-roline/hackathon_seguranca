@@ -80,12 +80,11 @@ DESCRIPTIONS = {
 # Status possíveis para as ocorrências
 STATUS_OPTIONS = ["pendente", "em análise", "resolvido", "cancelado"]
 
-def generate_issue_code() -> str:
+def generate_issue_code(idx) -> str:
     """Gera um código de ocorrência no formato CDF-YYYYMM-XXXX"""
     now = datetime.now()
     year_month = now.strftime("%Y%m")
-    random_digits = ''.join(random.choices(string.digits, k=4))
-    return f"CDF-{year_month}-{random_digits}"
+    return f"CDF-{year_month}-{idx}"
 
 def get_random_location(region: Optional[str] = None) -> tuple:
     """Retorna coordenadas aleatórias dentro de uma região especificada"""
@@ -168,7 +167,7 @@ def create_fake_issues(count: int, user_id: int = None) -> List[Issue]:
     
     created_issues = []
     
-    for _ in range(count):
+    for idx in range(count):
         # Escolhe uma categoria aleatória
         category_id = random.choice(list(CATEGORIES.keys()))
         
@@ -201,7 +200,7 @@ def create_fake_issues(count: int, user_id: int = None) -> List[Issue]:
         
         # Cria a nova ocorrência
         issue = Issue(
-            issue_code=generate_issue_code(),
+            issue_code=generate_issue_code(random.randint(1000, 9999)),
             user_id=user_id,
             category_id=category_id,
             description=random.choice(DESCRIPTIONS[category_id]),

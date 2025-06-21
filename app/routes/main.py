@@ -223,7 +223,49 @@ def report_issue():
             db.session.add(new_issue)
             db.session.commit()
             log.info(f"Ocorrência {issue_code} salva com sucesso no banco de dados")
-            
+
+            # Salva informações em json local afim de manter o histórico (orgão competente, usuário, categoria, path imagem)
+            history_data = {
+                "issue_code": issue_code,
+                "user_id": request.cookies.get('id', None),
+                "category_id": category_id,
+                "photo_filename": photo_filename,
+                "companie": c,
+                "created_at": current_date.isoformat()
+            }
+            list_find = [i for i in config.COMPANIES if i["id"] == 0]
+            if list_find:
+                dict_company = list_find[0]
+            else:
+                dict_company = {}
+
+            history_dir = os.path.join("app", "integrations")
+            os.makedirs(history_dir, exist_ok=True)  # Garante que o diretório existe
+
+            history_filename = os.path.join(
+                history_dir, f"{dict_company.get(int(category_id), 'organização')}_history.json"
+            )
+
+            # Carrega histórico existente ou cria uma lista vazia
+            if os.path.exists(history_filename):
+                with open(history_filename, 'r') as history_file:
+                    try:
+                        history_list = json.load(history_file)
+                    except json.JSONDecodeError:
+                        history_list = []
+            else:
+                history_list = []
+
+            # Adiciona o novo dado ao histórico
+            history_list.append(history_data)
+
+            # Salva o histórico atualizado
+            with open(history_filename, 'w') as history_file:
+                json.dump(history_list, history_file, indent=4)
+                log.info(f"Histórico salvo em: {history_filename}")
+
+            print("🪲 DEBUG | Dados de histórico salvos:", history_list)
+
             flash(f'Ocorrência {issue_code} reportada com sucesso!', 'success')
             return redirect(url_for('main.dashboard'))
             
