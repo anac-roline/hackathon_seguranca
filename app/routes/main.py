@@ -12,27 +12,8 @@ from app.utils.vision_analyzer import VisionAnalyzer
 from app.utils.logger import log
 from app.config.settings import Settings
 from app import app
-from flask import render_template, session, flash, redirect, url_for, Blueprint
-from app.utils.statistics import calcular_estatisticas #, calcular_estatisticas_globais, calcular_estatisticas_usuario # Funções separadas
 main_bp = Blueprint('main', __name__)
-from functools import wraps
-from flask import flash, redirect, url_for
 
-def analista_required(f):
-    """
-    Decorator que garante que o usuário logado tenha o papel de ANALISTA.
-    Se não tiver, redireciona para o dashboard principal com uma mensagem de erro.
-    """
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        # Se o usuário não estiver logado ou não for analista
-        is_analista = bool(request.cookies.get('is_analista'))
-        # Apenas analistas podem acessar esta página.
-        if is_analista:
-            return f(*args, **kwargs)
-        flash("Acesso restrito a usuários com permissão de analista.", "error")
-        return redirect(url_for('main.dashboard')) # Ou para a página inicial
-    return decorated_function
 
 def calcular_estatisticas():
     """Conecta ao banco e calcula as métricas de ocorrências."""
@@ -63,93 +44,17 @@ def index():
     """Página inicial."""
     return render_template('index.html')
 
-# Importe o novo decorator
-# from app.decorators import analista_required
 
-@main_bp.route('/profile/<int:user_id>')
-# @login_required
-def view_profile(user_id):
-    # 1. Busca o usuário específico pelo ID fornecido na URL
-    user_to_check = User.query.get_or_404(user_id)
-
-    # 2. Agora você tem o objeto 'user_to_check' e pode usar a propriedade .is_analista
-    #    diretamente nele, sem usar 'current_user'.
-    if user_to_check.is_analista:
-        role_description = "Este usuário é um Analista."
-    else:
-        role_description = "Este usuário é um Denunciante."
-    
-    return render_template(
-        'profile.html', 
-        user=user_to_check, 
-        role_info=role_description
-    )
-
-# ROTA 1: O DIRECIONADOR INTELIGENTE
-@main_bp.route('/dashboard', methods=['GET', 'POST'])
+@main_bp.route('/dashboard')
 def dashboard():
-    """
-    Direciona o usuário para o dashboard apropriado com base no seu papel.
-    """
-    print(">>>> DEBUG | Acessando o dashboard")
-    # user_to_view = User.query.get_or_404(user_id)
-    is_analista = request.cookies.get('is_analista')
-    # Apenas analistas podem acessar esta página.
-    print(f">>>> DEBUG | Verificando se é analista: {is_analista}")
-    if is_analista == "True":
-        flash("Acesso restrito a analistas.", "error")
-        return redirect(url_for('main.dashboard_analista'))
+    """Painel de controle, acessível apenas para usuários logados."""
+    if 'user_id' not in session:
+        flash('Você precisa estar logado para acessar esta página.', 'error')
+        return redirect(url_for('auth.login'))
     
-    return redirect(url_for('main.dashboard_denunciante'))
-
-# ROTA 2: DASHBOARD DO DENUNCIANTE
-@main_bp.route('/dashboard/minhas-ocorrencias')
-# @login_required
-# @analista_required
-def dashboard_denunciante():
-    """Painel focado no usuário que reporta as ocorrências."""
+    # Obter as estatísticas usando a função existente
+    estatisticas = calcular_estatisticas()
     
-    # # Um denunciante só pode ver suas próprias ocorrências.
-    # if not current_user.is_denunciante:
-    #     flash("Acesso não autorizado.", "error")
-    #     return redirect(url_for('main.dashboard'))
-
-    # Busca apenas as ocorrências DO USUÁRIO ATUAL
-    user_issues = Issue.query.filter_by(user_id=request.cookies.get('id')).order_by(Issue.created_at.desc()).all()
-    
-    # Calcula estatísticas apenas para este usuário
-    stats_usuario = {
-        "reportadas": len(user_issues),
-        "resolvidas": sum(1 for issue in user_issues if issue.status == 'resolvida'),
-        "em_andamento": sum(1 for issue in user_issues if issue.status == 'em_andamento')
-    }
-    
-    return render_template('dashboard_denunciante.html', issues=user_issues, stats=stats_usuario)
-
-# ROTA 3: DASHBOARD DO ANALISTA
-@main_bp.route('/dashboard/analise')
-# @login_required
-# @analista_required
-def dashboard_analista():
-    """Painel de análise de dados para gestores e analistas."""
-
-    
-
-    # Busca TODAS as ocorrências do sistema para análise
-    all_issues = Issue.query.order_by(Issue.created_at.desc()).all()
-    
-    # Calcula estatísticas GLOBAIS
-    stats_globais = calcular_estatisticas() # Uma função que busca dados de todo o sistema
-    
-    # Prepara dados para os mapas interativos e gráficos que criamos anteriormente
-    issues_json_para_mapa = [
-        {
-            'lat': float(issue.latitude), 
-            'lon': float(issue.longitude), 
-            'categoria': issue.category.name, # Supondo relação
-            'status': issue.status
-        } for issue in all_issues
-    ]
     # Mapeamento de categorias 
     categorias = {
         1: "Buraco na Via",
@@ -184,11 +89,13 @@ def dashboard_analista():
         issues_json = []
         flash("Não foi possível carregar suas ocorrências. Tente novamente mais tarde.", "error")
     
+    # Renderizar o template com todos os dados necessários
     return render_template(
-        'dashboard_analista.html', 
-        total_issues=len(all_issues), 
-        stats=stats_globais,
-        map_data=issues_json_para_mapa
+        'dashboard.html',
+        stats=estatisticas,
+        issues=issues,
+        issues_json=issues_json,
+        categories=categorias
     )
 
 @main_bp.route('/report_issue', methods=['GET', 'POST'])
