@@ -268,7 +268,7 @@
       }
 
       .nav-link.active::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: 0;
         left: 0;
@@ -785,7 +785,7 @@
           <button class="mobile-toggle" id="mobileMenuToggle">
             <i class="fas fa-bars"></i>
           </button>
-          
+
           <div class="user-menu">
             <button class="user-button" id="userMenuButton">
               <div class="user-avatar">A</div>
@@ -795,10 +795,13 @@
               </div>
               <i class="fas fa-chevron-down"></i>
             </button>
-            
+
             <div class="user-dropdown" id="userDropdown">
               <div class="dropdown-divider"></div>
-              <a href="{{ url_for('auth.logout') }}" class="dropdown-item logout">
+              <a
+                href="{{ url_for('auth.logout') }}"
+                class="dropdown-item logout"
+              >
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Sair</span>
               </a>
@@ -813,21 +816,28 @@
       <div class="nav-container">
         <ul class="nav-menu" id="navMenu">
           <li class="nav-item">
-            <a href="{{ url_for('admin.index') }}" class="nav-link {% if request.endpoint == 'admin.index' %}active{% endif %}">
+            <a
+              href="{{ url_for('admin.index') }}"
+              class="nav-link {% if request.endpoint == 'admin.index' %}active{% endif %}"
+            >
               <i class="fas fa-tachometer-alt nav-icon"></i>
               <span>Dashboard</span>
             </a>
           </li>
+          <a
+            href="{{ url_for('admin.issues') }}"
+            class="nav-link {% if request.endpoint == 'admin.issues' %}active{% endif %}"
+          >
+            <i class="fas fa-exclamation-circle nav-icon"></i>
+            <span>Ocorrências</span>
+          </a>
           <li class="nav-item">
-            <a href="{{ url_for('admin.index') }}" class="nav-link {% if request.endpoint == 'admin.issues' %}active{% endif %}">
-              <i class="fas fa-exclamation-circle nav-icon"></i>
-              <span>Ocorrências</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url_for('admin.index') }}" class="nav-link {% if request.endpoint == 'admin.users' %}active{% endif %}">
+            <a
+              href="{{ url_for('admin.index') }}"
+              class="nav-link {% if request.endpoint == 'admin.users' %}active{% endif %}"
+            >
               <i class="fas fa-users nav-icon"></i>
-              <span>Usuários</span>
+              <span>Cidadãos</span>
             </a>
           </li>
           <li class="nav-item">
@@ -851,30 +861,25 @@
     <!-- Main Content -->
     <main class="main-content">
       <div class="page-content">
-        {% with messages = get_flashed_messages(with_categories=true) %} 
-          {% if messages %} 
-            {% for category, message in messages %}
-              <div class="alert alert-{{ category }}">
-                <div class="alert-icon">
-                  {% if category == 'success' %}
-                    <i class="fas fa-check-circle"></i>
-                  {% elif category == 'danger' %}
-                    <i class="fas fa-exclamation-circle"></i>
-                  {% elif category == 'warning' %}
-                    <i class="fas fa-exclamation-triangle"></i>
-                  {% elif category == 'info' %}
-                    <i class="fas fa-info-circle"></i>
-                  {% endif %}
-                </div>
-                <div class="alert-content">
-                  <div class="alert-message">{{ message }}</div>
-                </div>
-              </div>
-            {% endfor %} 
-          {% endif %} 
-        {% endwith %} 
-        
-        {% block content %}{% endblock %}
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          <div class="alert-icon">
+            {% if category == 'success' %}
+            <i class="fas fa-check-circle"></i>
+            {% elif category == 'danger' %}
+            <i class="fas fa-exclamation-circle"></i>
+            {% elif category == 'warning' %}
+            <i class="fas fa-exclamation-triangle"></i>
+            {% elif category == 'info' %}
+            <i class="fas fa-info-circle"></i>
+            {% endif %}
+          </div>
+          <div class="alert-content">
+            <div class="alert-message">{{ message }}</div>
+          </div>
+        </div>
+        {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
       </div>
     </main>
 
@@ -883,35 +888,38 @@
         // Toggle mobile menu
         const mobileMenuToggle = document.getElementById("mobileMenuToggle");
         const navMenu = document.getElementById("navMenu");
-        
+
         if (mobileMenuToggle) {
-          mobileMenuToggle.addEventListener("click", function() {
+          mobileMenuToggle.addEventListener("click", function () {
             navMenu.classList.toggle("active");
             document.body.classList.toggle("menu-active");
           });
         }
-        
+
         // User dropdown menu
         const userMenuButton = document.getElementById("userMenuButton");
         const userDropdown = document.getElementById("userDropdown");
-        
+
         if (userMenuButton && userDropdown) {
-          userMenuButton.addEventListener("click", function() {
+          userMenuButton.addEventListener("click", function () {
             userDropdown.classList.toggle("active");
           });
-          
+
           // Close dropdown when clicking outside
-          document.addEventListener("click", function(event) {
-            if (!userMenuButton.contains(event.target) && !userDropdown.contains(event.target)) {
+          document.addEventListener("click", function (event) {
+            if (
+              !userMenuButton.contains(event.target) &&
+              !userDropdown.contains(event.target)
+            ) {
               userDropdown.classList.remove("active");
             }
           });
         }
-        
+
         // Handle disabled links
         const disabledLinks = document.querySelectorAll(".nav-link.disabled");
-        disabledLinks.forEach(function(link) {
-          link.addEventListener("click", function(e) {
+        disabledLinks.forEach(function (link) {
+          link.addEventListener("click", function (e) {
             e.preventDefault();
           });
         });
