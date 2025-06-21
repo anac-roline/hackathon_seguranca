@@ -88,3 +88,7 @@ tmp/
 # Arquivos específicos para o hackathon
 key.txt
 credentials.json
+
+
+#db
+./instance/site.db
