@@ -76,22 +76,33 @@ block content %}
         </div>
 
         <div class="photo-controls">
-          <div class="file-input-container">
-            <input
-              type="file"
-              name="photo"
-              id="photoInput"
-              accept="image/*"
-              capture="environment"
-            />
-            <label for="photoInput" class="btn-photo">
+          <!-- Input para arquivo -->
+          <input
+            type="file"
+            id="fileInput"
+            name="photo"
+            accept="image/*"
+            style="display: none"
+          />
+
+          <!-- Input para câmera -->
+          <input
+            type="file"
+            id="cameraInput"
+            accept="image/*"
+            capture="environment"
+            style="display: none"
+          />
+
+          <div class="photo-controls">
+            <label for="fileInput" class="btn-photo">
               <i class="fas fa-upload"></i> Escolher Arquivo
             </label>
-          </div>
 
-          <button type="button" id="takeCameraPhoto" class="btn-photo">
-            <i class="fas fa-camera"></i> Tirar Foto
-          </button>
+            <button type="button" id="takeCameraPhoto" class="btn-photo">
+              <i class="fas fa-camera"></i> Tirar Foto
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -436,6 +447,35 @@ block content %}
           return false;
         }
       });
+  });
+
+  const fileInput = document.getElementById("fileInput");
+  const cameraInput = document.getElementById("cameraInput");
+
+  // Botão câmera
+  takeCameraBtn.addEventListener("click", function () {
+    cameraInput.click();
+  });
+
+  // Preview para ambos inputs
+  [fileInput, cameraInput].forEach((input) => {
+    input.addEventListener("change", function (e) {
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          photoPreview.src = e.target.result;
+          photoPreview.style.display = "block";
+        };
+        reader.readAsDataURL(this.files[0]);
+
+        // Sincroniza o arquivo para o outro input
+        if (this === fileInput) {
+          cameraInput.files = this.files;
+        } else {
+          fileInput.files = this.files;
+        }
+      }
+    });
   });
 </script>
 {% endblock %}
