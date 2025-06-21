@@ -1,0 +1,589 @@
+{% extends "admin/base.html" %} {% block title %}Dashboard Analítico{% endblock
+%} {% block content %}
+<div class="page-title">
+  <h1>Dashboard Analítico</h1>
+  <div class="breadcrumb">
+    <a href="{{ url_for('admin.index') }}">Admin</a>
+    <span class="breadcrumb-divider">/</span>
+    <span>Dashboard</span>
+  </div>
+</div>
+
+<!-- Filtros -->
+<div class="card filter-card">
+  <div class="card-body">
+    <form
+      id="filter-form"
+      action="{{ url_for('admin.filter_analytics') }}"
+      method="post"
+    >
+      <div class="filter-grid">
+        <div class="filter-item">
+          <label class="form-label">Período</label>
+          <select id="filter-period" name="period" class="form-select">
+            <option value="7">Últimos 7 dias</option>
+            <option value="30" selected>Últimos 30 dias</option>
+            <option value="90">Últimos 90 dias</option>
+            <option value="365">Último ano</option>
+            <option value="custom">Personalizado</option>
+          </select>
+        </div>
+        <div class="filter-item date-range" style="display: none">
+          <div class="date-inputs">
+            <div>
+              <label class="form-label">Data Inicial</label>
+              <input
+                type="date"
+                id="start-date"
+                name="start_date"
+                class="form-control"
+              />
+            </div>
+            <div>
+              <label class="form-label">Data Final</label>
+              <input
+                type="date"
+                id="end-date"
+                name="end_date"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="filter-item">
+          <label class="form-label">Categoria</label>
+          <select id="filter-category" name="category" class="form-select">
+            <option value="all" selected>Todas as categorias</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="filter-item">
+          <label class="form-label">Status</label>
+          <select id="filter-status" name="status" class="form-select">
+            <option value="all" selected>Todos os status</option>
+            <option value="pendente">Pendentes</option>
+            <option value="em_analise">Em Análise</option>
+            <option value="em_processamento">Em Processamento</option>
+            <option value="resolvido">Resolvidos</option>
+            <option value="cancelado">Cancelados</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label class="form-label">Órgão</label>
+          <select id="filter-company" name="company" class="form-select">
+            <option value="all" selected>Todos os órgãos</option>
+            <option value="Terracap">Terracap</option>
+            <option value="Neoenergia">Neoenergia</option>
+            <option value="SLU">SLU</option>
+            <option value="Caesb">Caesb</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label class="form-label">&nbsp;</label>
+          <button type="submit" id="apply-filters" class="btn btn-primary">
+            <i class="fas fa-filter"></i> Aplicar Filtros
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- KPIs Principais -->
+<div class="stats-grid">
+  <div class="stat-card" id="total-reports">
+    <div class="stat-icon primary">
+      <i class="fas fa-clipboard-list"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ analytics.total_reports }}</div>
+      <div class="stat-label">Total de Ocorrências</div>
+      <div
+        class="stat-change {% if analytics.reports_change >= 0 %}positive{% else %}negative{% endif %}"
+      >
+        <i
+          class="fas fa-arrow-{% if analytics.reports_change >= 0 %}up{% else %}down{% endif %}"
+        ></i>
+        {{ analytics.reports_change|abs }}% vs período anterior
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card" id="pending-reports">
+    <div class="stat-icon warning">
+      <i class="fas fa-clock"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ analytics.pending_reports }}</div>
+      <div class="stat-label">Pendentes</div>
+      <div
+        class="stat-change {% if analytics.pending_change <= 0 %}positive{% else %}negative{% endif %}"
+      >
+        <i
+          class="fas fa-arrow-{% if analytics.pending_change <= 0 %}down{% else %}up{% endif %}"
+        ></i>
+        {{ analytics.pending_change|abs }}% vs período anterior
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card" id="processing-reports">
+    <div class="stat-icon info">
+      <i class="fas fa-cog"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ analytics.processing_reports }}</div>
+      <div class="stat-label">Em Processamento</div>
+      <div class="stat-change">
+        <i
+          class="fas fa-arrow-{% if analytics.processing_change <= 0 %}down{% else %}up{% endif %}"
+        ></i>
+        {{ analytics.processing_change|abs }}% vs período anterior
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card" id="resolved-reports">
+    <div class="stat-icon success">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ analytics.resolved_reports }}</div>
+      <div class="stat-label">Resolvidas</div>
+      <div class="stat-change positive">
+        <i class="fas fa-arrow-up"></i>
+        {{ analytics.resolved_change|abs }}% vs período anterior
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gráficos Principais -->
+<div class="charts-grid">
+  <!-- Tendência de Ocorrências -->
+  <div class="card chart-card trend-chart">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="fas fa-chart-line"></i> Tendência de Ocorrências
+      </div>
+    </div>
+    <div class="card-body">
+      <canvas id="trendChart" height="250"></canvas>
+    </div>
+  </div>
+
+  <!-- Distribuição por Categoria -->
+  <div class="card chart-card category-chart">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="fas fa-pie-chart"></i> Distribuição por Categoria
+      </div>
+    </div>
+    <div class="card-body">
+      <canvas id="categoryChart" height="250"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="charts-grid">
+  <!-- Mapa de Ocorrências -->
+  <div class="card chart-card map-chart">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="fas fa-map-marked-alt"></i> Mapa de Ocorrências
+      </div>
+    </div>
+    <div class="card-body">
+      <div id="reportMap" class="map-container"></div>
+    </div>
+  </div>
+
+  <!-- Ocorrências por Órgão -->
+  <div class="card chart-card agency-chart">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="fas fa-building"></i> Ocorrências por Órgão
+      </div>
+    </div>
+    <div class="card-body">
+      <canvas id="agencyChart" height="250"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Ocorrências Recentes -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      <i class="fas fa-list"></i> Ocorrências Recentes
+    </div>
+    <div class="card-actions">
+      <a href="#" class="btn btn-sm btn-primary" id="view-all-reports">
+        <i class="fas fa-eye"></i> Ver Todas
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Data</th>
+            <th>Órgão</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for report in recent_reports %}
+          <tr>
+            <td>{{ report.id }}</td>
+            <td>{{ report.title|truncate(50) }}</td>
+            <td>{{ report.category }}</td>
+            <td>{{ report.date }}</td>
+            <td>{{ report.agency }}</td>
+            <td>
+              <span class="status-pill {{ report.status }}">
+                {% if report.status == 'pendente' %}
+                <i class="fas fa-clock"></i> Pendente {% elif report.status ==
+                'em_analise' %} <i class="fas fa-search"></i> Em Análise {% elif
+                report.status == 'em_processamento' %}
+                <i class="fas fa-cog"></i> Em Processamento {% elif
+                report.status == 'resolvido' %}
+                <i class="fas fa-check-circle"></i> Resolvido {% elif
+                report.status == 'cancelado' %}
+                <i class="fas fa-times-circle"></i> Cancelado {% endif %}
+              </span>
+            </td>
+            <td>
+              <div class="table-actions">
+                <a
+                  href="{{ url_for('admin.issue_detail', issue_code=report.id) }}"
+                  class="btn btn-sm btn-icon btn-outline"
+                  title="Ver Detalhes"
+                >
+                  <i class="fas fa-eye"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  .filter-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    align-items: end;
+  }
+
+  .date-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .chart-card {
+    height: 100%;
+  }
+
+  .map-container {
+    height: 350px;
+    background-color: #f1f5f9;
+    border-radius: 4px;
+    color: var(--gray-500);
+    font-size: 1.25rem;
+  }
+
+  .stat-icon.info {
+    background-color: rgba(14, 165, 233, 0.1);
+    color: #0ea5e9;
+  }
+
+  @media (max-width: 992px) {
+    .charts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Correção para o tamanho das colunas na tabela */
+  table th:nth-child(2) {
+    width: 30%;
+  }
+
+  table th:nth-child(1),
+  table th:nth-child(3),
+  table th:nth-child(4),
+  table th:nth-child(5),
+  table th:nth-child(7) {
+    width: 10%;
+  }
+
+  table th:nth-child(6) {
+    width: 15%;
+  }
+</style>
+
+<!-- Inclusão das bibliotecas de gráficos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"
+/>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Configuração de filtros
+      const periodSelect = document.getElementById('filter-period');
+      const dateRange = document.querySelector('.date-range');
+      const filterForm = document.getElementById('filter-form');
+
+      // Inicializar datas para o período personalizado
+      const today = new Date();
+      const thirtyDaysAgo = new Date(today);
+      thirtyDaysAgo.setDate(today.getDate() - 30);
+
+      document.getElementById('end-date').valueAsDate = today;
+      document.getElementById('start-date').valueAsDate = thirtyDaysAgo;
+
+      periodSelect.addEventListener('change', function() {
+          if (this.value === 'custom') {
+              dateRange.style.display = 'block';
+          } else {
+              dateRange.style.display = 'none';
+          }
+      });
+
+      // Processamento do formulário via AJAX
+      filterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const formData = new FormData(this);
+
+          // Mostrar indicador de carregamento
+          document.body.classList.add('loading');
+
+          fetch(this.action, {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Atualizar os valores dos KPIs
+              document.querySelector('#total-reports .stat-value').textContent = data.total_reports;
+              document.querySelector('#pending-reports .stat-value').textContent = data.pending_reports;
+              document.querySelector('#processing-reports .stat-value').textContent = data.processing_reports;
+              document.querySelector('#resolved-reports .stat-value').textContent = data.resolved_reports;
+
+              // Atualizar os gráficos
+              updateCharts(data);
+
+              // Esconder indicador de carregamento
+              document.body.classList.remove('loading');
+          })
+          .catch(error => {
+              console.error('Erro ao filtrar dados:', error);
+              document.body.classList.remove('loading');
+              alert('Erro ao aplicar filtros. Por favor, tente novamente.');
+          });
+      });
+
+      // Gráfico de Tendência
+      const trendCtx = document.getElementById('trendChart').getContext('2d');
+      const trendChart = new Chart(trendCtx, {
+          type: 'line',
+          data: {
+              labels: {{ analytics.trend_labels|tojson }},
+              datasets: [
+                  {
+                      label: 'Novas Ocorrências',
+                      data: {{ analytics.new_reports_trend|tojson }},
+                      borderColor: '#1d4ed8',
+                      backgroundColor: 'rgba(29, 78, 216, 0.1)',
+                      tension: 0.4,
+                      fill: true
+                  },
+                  {
+                      label: 'Resolvidas',
+                      data: {{ analytics.resolved_trend|tojson }},
+                      borderColor: '#16a34a',
+                      backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                      tension: 0.4,
+                      fill: true
+                  }
+              ]
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                  legend: {
+                      position: 'top',
+                  },
+                  tooltip: {
+                      mode: 'index',
+                      intersect: false
+                  }
+              },
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              },
+              interaction: {
+                  intersect: false,
+                  mode: 'index',
+              }
+          }
+      });
+
+      // Gráfico de Categorias
+      const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+      const categoryChart = new Chart(categoryCtx, {
+          type: 'doughnut',
+          data: {
+              labels: {{ analytics.category_labels|tojson }},
+              datasets: [{
+                  data: {{ analytics.category_data|tojson }},
+                  backgroundColor: [
+                      '#1d4ed8', '#16a34a', '#ea580c', '#eab308',
+                      '#0ea5e9', '#8b5cf6', '#ec4899', '#f43f5e'
+                  ]
+              }]
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                  legend: {
+                      position: 'right',
+                  }
+              }
+          }
+      });
+
+      // Gráfico de Ocorrências por Órgão (antes era desempenho por órgão)
+      const agencyCtx = document.getElementById('agencyChart').getContext('2d');
+      const agencyChart = new Chart(agencyCtx, {
+          type: 'bar',
+          data: {
+              labels: {{ analytics.agency_labels|tojson }},
+              datasets: [{
+                  label: 'Quantidade de Ocorrências',
+                  data: {{ analytics.agency_count|tojson }},
+                  backgroundColor: '#1d4ed8'
+              }]
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              indexAxis: 'y',
+              plugins: {
+                  legend: {
+                      display: false
+                  }
+              }
+          }
+      });
+
+      // Inicialização do Mapa (se estiver disponível o Leaflet)
+      try {
+          const mapElement = document.getElementById('reportMap');
+
+          if (typeof L !== 'undefined' && mapElement) {
+              // Coordenadas de Brasília
+              const map = L.map('reportMap').setView([-15.7801, -47.9292], 11);
+
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              }).addTo(map);
+
+              // Adicionar marcadores para as ocorrências
+              const reportLocations = {{ analytics.report_locations|tojson }};
+
+              reportLocations.forEach(location => {
+                  const marker = L.marker([location.lat, location.lng]).addTo(map);
+                  marker.bindPopup(`<b>${location.title}</b><br>${location.category}<br>Status: ${location.status}`);
+              });
+          } else {
+              mapElement.innerHTML = 'Mapa não disponível';
+          }
+      } catch (e) {
+          console.error('Erro ao inicializar o mapa:', e);
+          document.getElementById('reportMap').innerHTML = 'Erro ao carregar o mapa';
+      }
+
+      // Função para atualizar os gráficos com novos dados
+      function updateCharts(data) {
+          // Atualizar gráfico de tendência
+          trendChart.data.labels = data.trend_labels;
+          trendChart.data.datasets[0].data = data.new_reports_trend;
+          trendChart.data.datasets[1].data = data.resolved_trend;
+          trendChart.update();
+
+          // Atualizar gráfico de categorias
+          categoryChart.data.labels = data.category_labels;
+          categoryChart.data.datasets[0].data = data.category_data;
+          categoryChart.update();
+
+          // Atualizar gráfico de órgãos
+          agencyChart.data.labels = data.agency_labels;
+          agencyChart.data.datasets[0].data = data.agency_count;
+          agencyChart.update();
+
+          // Atualizar mapa
+          try {
+              const mapElement = document.getElementById('reportMap');
+
+              if (typeof L !== 'undefined' && mapElement) {
+                  // Limpar mapa atual
+                  mapElement.innerHTML = '';
+
+                  // Reinicializar o mapa
+                  const map = L.map('reportMap').setView([-15.7801, -47.9292], 11);
+
+                  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  }).addTo(map);
+
+                  // Adicionar novos marcadores
+                  data.report_locations.forEach(location => {
+                      const marker = L.marker([location.lat, location.lng]).addTo(map);
+                      marker.bindPopup(`<b>${location.title}</b><br>${location.category}<br>Status: ${location.status}`);
+                  });
+              }
+          } catch (e) {
+              console.error('Erro ao atualizar o mapa:', e);
+          }
+      }
+
+      // Botão de ver todas as ocorrências
+      document.getElementById('view-all-reports').addEventListener('click', function(e) {
+          e.preventDefault();
+          // Aqui você pode implementar a navegação para uma página que liste todas as ocorrências
+          alert('Funcionalidade para visualizar todas as ocorrências será implementada em breve.');
+      });
+  });
+</script>
+{% endblock %}
