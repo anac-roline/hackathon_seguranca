@@ -52,7 +52,7 @@ def login():
             return redirect(url_for('main.dashboard'))
 
         flash('Credenciais inválidas. Verifique seu usuário e senha.', 'error')
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
     return render_template('login.html')
 

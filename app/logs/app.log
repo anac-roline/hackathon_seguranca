@@ -137,3 +137,26 @@ OPENAPI_API_KEY
 2025-06-20 18:26:58,863 [INFO] - Análise de IA concluída para CDF-2506-0013: {"valid": true, "confidence": 0.95, "matches_description": true, "detected_elements": ["buraco", "rachaduras significativas", "afundamento"], "analysis": "A imagem mostra um grande buraco na via p\u00fablica, com rachaduras significativas e afundamento, indicado por um cone de tr\u00e2nsito.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": false}
 2025-06-20 18:26:58,998 [INFO] - Ocorrência CDF-2506-0013 salva com sucesso no banco de dados
 >>>>>>> e5a29bd5c5a917f7549bfecdebe18b03dbecbcc8
+2025-06-20 19:50:35,398 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-20 19:50:35,405 [INFO] - Código gerado: CDF-2506-0001
+2025-06-20 19:50:35,405 [INFO] - Processando foto: buraco-itaquera.jpg
+2025-06-20 19:50:35,406 [INFO] - Foto salva em: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0001.jpg
+2025-06-20 19:50:35,407 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0001
+2025-06-20 19:50:35,465 [INFO] - Analisando imagem com API Vision: /Users/andriel.prado/Documents/Development/Projetos/CPBR17/hackaton/app/static/uploads/issues/CDF-2506-0001.jpg (categoria: 3)
+2025-06-20 19:50:35,466 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-20 19:50:40,051 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-20 19:50:40,051 [INFO] - Análise da imagem concluída: {"valid": true, "confidence": 0.9, "matches_description": true, "detected_elements": ["cal\u00e7ada danificada", "faixa de pedestres", "buracos no asfalto"], "analysis": "A imagem mostra uma cal\u00e7ada e faixa de pedestres danificadas, com buracos no asfalto, representando um risco para pedestres e ve\u00edculos.", "needs_human_review": false, "category_id": 3, "threshold": 0.6, "needs_review": false}
+2025-06-20 19:50:40,053 [INFO] - Análise de IA concluída para CDF-2506-0001: {"valid": true, "confidence": 0.9, "matches_description": true, "detected_elements": ["cal\u00e7ada danificada", "faixa de pedestres", "buracos no asfalto"], "analysis": "A imagem mostra uma cal\u00e7ada e faixa de pedestres danificadas, com buracos no asfalto, representando um risco para pedestres e ve\u00edculos.", "needs_human_review": false, "category_id": 3, "threshold": 0.6, "needs_review": false}
+2025-06-20 19:50:40,059 [INFO] - Ocorrência CDF-2506-0001 salva com sucesso no banco de dados
+2025-06-20 20:09:02,969 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:10:33,061 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:11:02,923 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:11:30,504 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:16:01,436 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:17:45,042 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:20:08,040 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:24:29,244 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:25:25,221 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:26:26,226 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:27:16,789 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 20:44:00,881 [INFO] - Encontradas 1 ocorrências para o usuário 1

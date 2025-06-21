@@ -50,9 +50,54 @@ def dashboard():
     if 'user_id' not in session:
         flash('Você precisa estar logado para acessar esta página.', 'error')
         return redirect(url_for('auth.login'))
-
+    
+    # Obter as estatísticas usando a função existente
     estatisticas = calcular_estatisticas()
-    return render_template('dashboard.html', stats=estatisticas)
+    
+    # Mapeamento de categorias (poderia vir do banco de dados)
+    categorias = {
+        1: "Buraco na Via",
+        2: "Iluminação Pública",
+        3: "Lixo/Entulho",
+        4: "Alagamento",
+        5: "Sinalização de Trânsito",
+        6: "Poda de Árvore",
+        7: "Fios Caídos",
+        8: "Vazamento de Água/Esgoto"
+    }
+    
+    try:
+        # Buscar as ocorrências do usuário atual
+        issues = Issue.query.filter_by(user_id=session['user_id']).order_by(Issue.created_at.desc()).all()
+        
+        # Preparar dados para o mapa (serializar)
+        issues_json = []
+        for issue in issues:
+            issues_json.append({
+                'issue_code': issue.issue_code,
+                'description': issue.description,
+                'latitude': float(issue.latitude),
+                'longitude': float(issue.longitude),
+                'status': issue.status,
+                'category_id': issue.category_id,
+                'photo_filename': issue.photo_filename
+            })
+        
+        log.info(f"Encontradas {len(issues)} ocorrências para o usuário {session['user_id']}")
+    except Exception as e:
+        log.error(f"Erro ao buscar ocorrências: {str(e)}")
+        issues = []
+        issues_json = []
+        flash("Não foi possível carregar suas ocorrências. Tente novamente mais tarde.", "error")
+    
+    # Renderizar o template com todos os dados necessários
+    return render_template(
+        'dashboard.html',
+        stats=estatisticas,
+        issues=issues,
+        issues_json=issues_json,
+        categories=categorias
+    )
 
 @main_bp.route('/report_issue', methods=['GET', 'POST'])
 def report_issue():
