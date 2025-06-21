@@ -27,7 +27,7 @@ def signup():
         db.session.commit()
 
         flash('Conta criada com sucesso! Faça o login.', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
     return render_template('signup.html')
 
