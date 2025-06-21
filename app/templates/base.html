@@ -22,9 +22,23 @@
                 <i class="fas fa-shield-alt"></i>
                 VigiaDF
             </a>
+            <p>{{ request.cookies.get('is_analista_int') }}</p>
             <ul>
                 {% if 'username' in session %}
-                    <li><a href="{{ url_for('main.dashboard') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    {% if request.cookies.get('is_analista_int') == "0" %}
+                <li>
+                    <a href="{{ url_for('main.dashboard_analista') }}">
+                        <i class="fas fa-chart-line"></i> Painel de Análise
+                    </a>
+                </li>
+                
+        {% else %}
+        <li>
+            <a href="{{ url_for('main.dashboard_denunciante') }}">
+                <i class="fas fa-list-alt"></i> Minhas Ocorrências
+            </a>
+        </li>
+    {% endif %}
 {#                    <li><a href="{{ url_for('main.report_issue') }}"><i class="fas fa-exclamation-circle"></i> Reportar</a></li>#}
 {#                    <li><a href="{{ url_for('main.my_reports') }}"><i class="fas fa-list"></i> Minhas Ocorrências</a></li>#}
                     <li><a href="{{ url_for('auth.logout') }}" class="btn-nav"><i class="fas fa-sign-out-alt"></i> Sair</a></li>

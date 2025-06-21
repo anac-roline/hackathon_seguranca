@@ -1,0 +1,47 @@
+{% extends "base.html" %} 
+{% block title %}Minhas Ocorrências{% endblock %} 
+{% block content %}
+
+<div class="dashboard-header">
+  <div class="dashboard-welcome">
+    <h1>Olá, <span>{{ request.cookies.get('username') }}</span></h1>
+    <p>Acompanhe suas ocorrências e ajude a fiscalizar a cidade.</p>
+  </div>
+  <div class="dashboard-actions">
+    <a href="{{ url_for('main.report_issue') }}" class="btn btn-primary">
+      <i class="fas fa-plus-circle"></i> Nova Ocorrência
+    </a>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <i class="fas fa-file-alt stat-icon"></i>
+    <div class="stat-value">{{ stats.reportadas }}</div>
+    <div class="stat-label">Reportadas por Você</div>
+  </div>
+  <div class="stat-card">
+    <i class="fas fa-check-circle stat-icon"></i>
+    <div class="stat-value">{{ stats.resolvidas }}</div>
+    <div class="stat-label">Suas Ocorrências Resolvidas</div>
+  </div>
+  <div class="stat-card">
+    <i class="fas fa-clock stat-icon"></i>
+    <div class="stat-value">{{ stats.em_andamento }}</div>
+    <div class="stat-label">Em Andamento</div>
+  </div>
+</div>
+
+<div class="issues-section">
+  <div class="section-header">
+    <h2><i class="fas fa-list-alt"></i> Histórico das Suas Ocorrências</h2>
+  </div>
+  {% if issues %}
+    {% else %}
+    <div class="empty-state">
+      <p>Você ainda não reportou nenhuma ocorrência.</p>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}
