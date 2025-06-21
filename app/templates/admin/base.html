@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      {% block title %}Painel Administrativo{% endblock %} | CidadeFiscal
+      {% block title %}Painel Administrativo{% endblock %} | VigiaDF Admin
     </title>
     <link
       rel="stylesheet"
@@ -38,8 +38,8 @@
         --gray-800: #1f2937;
         --gray-900: #111827;
 
-        --sidebar-width: 260px;
-        --header-height: 60px;
+        --header-height: 64px;
+        --nav-height: 48px;
         --container-width: 1300px;
       }
 
@@ -55,236 +55,71 @@
         background-color: var(--gray-100);
         color: var(--gray-700);
         line-height: 1.6;
-        display: flex;
         min-height: 100vh;
-      }
-
-      /* Sidebar */
-      .sidebar {
-        width: var(--sidebar-width);
-        background-color: var(--gray-800);
-        color: var(--gray-300);
-        height: 100vh;
-        position: fixed;
-        left: 0;
-        top: 0;
-        overflow-y: auto;
-        transition: all 0.3s ease;
-        z-index: 100;
-      }
-
-      .sidebar-header {
-        padding: 1.25rem;
         display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        border-bottom: 1px solid var(--gray-700);
+        flex-direction: column;
       }
 
-      .sidebar-logo {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: white;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        text-decoration: none;
-      }
-
-      .sidebar-logo i {
-        color: var(--accent);
-      }
-
-      .sidebar-toggle {
-        display: none;
-        background: none;
-        border: none;
-        color: var(--gray-400);
-        cursor: pointer;
-        font-size: 1.25rem;
-        margin-left: auto;
-      }
-
-      .sidebar-nav {
-        padding: 1.25rem 0;
-      }
-
-      .sidebar-heading {
-        padding: 0 1.25rem;
-        margin-bottom: 0.5rem;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--gray-500);
-        font-weight: 600;
-      }
-
-      .sidebar-menu {
-        list-style: none;
-      }
-
-      .sidebar-item {
-        margin-bottom: 0.25rem;
-      }
-
-      .sidebar-link {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1.25rem;
-        color: var(--gray-300);
-        text-decoration: none;
-        transition: all 0.2s ease;
-        position: relative;
-      }
-
-      .sidebar-link:hover {
-        color: white;
-        background-color: var(--gray-700);
-      }
-
-      .sidebar-link.active {
-        color: white;
-        background-color: var(--primary);
-      }
-
-      .sidebar-link.active::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 4px;
-        background-color: var(--accent);
-      }
-
-      .sidebar-icon {
-        font-size: 1.1rem;
-        width: 20px;
-        text-align: center;
-      }
-
-      .sidebar-dropdown {
-        overflow: hidden;
-        max-height: 0;
-        transition: max-height 0.3s ease;
-      }
-
-      .sidebar-dropdown.open {
-        max-height: 500px;
-      }
-
-      .sidebar-dropdown .sidebar-link {
-        padding-left: 3.5rem;
-      }
-
-      .dropdown-toggle {
-        position: relative;
-      }
-
-      .dropdown-toggle::after {
-        content: "\f105";
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        position: absolute;
-        right: 1.25rem;
-        transition: transform 0.3s ease;
-      }
-
-      .dropdown-toggle.active::after {
-        transform: rotate(90deg);
-      }
-
-      /* Main Content */
-      .main-content {
-        flex: 1;
-        margin-left: var(--sidebar-width);
-        transition: margin-left 0.3s ease;
-      }
-
+      /* Header */
       .header {
+        background-color: var(--gray-800);
+        color: white;
         height: var(--header-height);
-        background-color: white;
-        border-bottom: 1px solid var(--gray-200);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        height: 100%;
         padding: 0 1.5rem;
-        position: sticky;
-        top: 0;
-        z-index: 99;
+        max-width: var(--container-width);
+        margin: 0 auto;
       }
 
-      .mobile-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.25rem;
-        color: var(--gray-600);
-        cursor: pointer;
-      }
-
-      .header-right {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .header-search {
-        display: flex;
-        align-items: center;
-        background-color: var(--gray-100);
-        border-radius: 4px;
-        padding: 0.5rem 0.75rem;
-      }
-
-      .header-search input {
-        border: none;
-        background: none;
-        outline: none;
-        padding: 0.25rem;
-        width: 200px;
-        font-size: 0.9rem;
-      }
-
-      .header-search i {
-        color: var(--gray-500);
-      }
-
-      .header-notification {
-        position: relative;
-        color: var(--gray-600);
-        font-size: 1.1rem;
-        cursor: pointer;
-      }
-
-      .notification-badge {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background-color: var(--danger);
-        color: white;
-        border-radius: 50%;
-        font-size: 0.7rem;
-        width: 18px;
-        height: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .header-user {
+      .header-logo {
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        cursor: pointer;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+      }
+
+      .header-logo i {
+        color: var(--accent);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .user-menu {
+        position: relative;
+      }
+
+      .user-button {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
         padding: 0.5rem;
         border-radius: 4px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: white;
         transition: background-color 0.2s ease;
       }
 
-      .header-user:hover {
-        background-color: var(--gray-100);
+      .user-button:hover {
+        background-color: var(--gray-700);
       }
 
       .user-avatar {
@@ -301,28 +136,185 @@
       }
 
       .user-info {
-        display: none;
-      }
-
-      @media (min-width: 992px) {
-        .user-info {
-          display: block;
-        }
+        text-align: left;
       }
 
       .user-name {
         font-weight: 600;
         font-size: 0.9rem;
-        color: var(--gray-800);
+        color: white;
       }
 
       .user-role {
         font-size: 0.8rem;
-        color: var(--gray-500);
+        color: var(--gray-400);
       }
 
-      /* Page Content */
+      .user-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        min-width: 180px;
+        margin-top: 0.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.2s ease;
+        z-index: 10;
+      }
+
+      .user-dropdown.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        color: var(--gray-700);
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+      }
+
+      .dropdown-item:hover {
+        background-color: var(--gray-100);
+      }
+
+      .dropdown-item:first-child {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+      }
+
+      .dropdown-item:last-child {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+
+      .dropdown-item i {
+        font-size: 1rem;
+        color: var(--gray-500);
+        width: 20px;
+        text-align: center;
+      }
+
+      .dropdown-divider {
+        height: 1px;
+        background-color: var(--gray-200);
+        margin: 0.25rem 0;
+      }
+
+      .dropdown-item.logout {
+        color: var(--danger);
+      }
+
+      .dropdown-item.logout i {
+        color: var(--danger);
+      }
+
+      /* Navigation */
+      .nav {
+        background-color: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        height: var(--nav-height);
+        position: sticky;
+        top: var(--header-height);
+        z-index: 99;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 1.5rem;
+        max-width: var(--container-width);
+        margin: 0 auto;
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-item {
+        position: relative;
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--gray-700);
+        font-weight: 500;
+        text-decoration: none;
+        padding: 0.75rem 0;
+        transition: color 0.2s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--primary);
+      }
+
+      .nav-link.active {
+        color: var(--primary);
+      }
+
+      .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--primary);
+      }
+
+      .nav-icon {
+        font-size: 1rem;
+      }
+
+      .nav-link.disabled {
+        color: var(--gray-400);
+        cursor: not-allowed;
+      }
+
+      .nav-link.disabled .soon-badge {
+        display: inline-block;
+        padding: 0.15rem 0.5rem;
+        background-color: var(--gray-200);
+        color: var(--gray-600);
+        border-radius: 12px;
+        font-size: 0.65rem;
+        margin-left: 0.5rem;
+        font-weight: 600;
+      }
+
+      .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.25rem;
+        cursor: pointer;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding-top: 1rem;
+      }
+
       .page-content {
+        max-width: var(--container-width);
+        margin: 0 auto;
         padding: 1.5rem;
       }
 
@@ -438,6 +430,11 @@
       .stat-icon.danger {
         background-color: rgba(220, 38, 38, 0.1);
         color: var(--danger);
+      }
+
+      .stat-icon.info {
+        background-color: rgba(14, 165, 233, 0.1);
+        color: var(--info);
       }
 
       .stat-content {
@@ -659,61 +656,6 @@
         padding-right: 2.5rem;
       }
 
-      .form-check {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .form-check-input {
-        width: 1rem;
-        height: 1rem;
-      }
-
-      .form-check-label {
-        font-size: 0.875rem;
-        color: var(--gray-700);
-      }
-
-      /* Pagination */
-      .pagination {
-        display: flex;
-        gap: 0.25rem;
-      }
-
-      .page-item {
-        list-style: none;
-      }
-
-      .page-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 4px;
-        border: 1px solid var(--gray-300);
-        color: var(--gray-700);
-        text-decoration: none;
-        transition: all 0.2s ease;
-      }
-
-      .page-link:hover {
-        background-color: var(--gray-100);
-      }
-
-      .page-item.active .page-link {
-        background-color: var(--primary);
-        color: white;
-        border-color: var(--primary);
-      }
-
-      .page-item.disabled .page-link {
-        color: var(--gray-400);
-        cursor: not-allowed;
-      }
-
       /* Alerts */
       .alert {
         padding: 0.75rem 1rem;
@@ -767,249 +709,210 @@
 
       /* Responsividade */
       @media (max-width: 992px) {
-        .sidebar {
-          transform: translateX(-100%);
+        .nav-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background-color: white;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          flex-direction: column;
+          padding: 1rem 0;
+          gap: 0;
         }
 
-        .sidebar.active {
-          transform: translateX(0);
+        .nav-menu.active {
+          display: flex;
         }
 
-        .main-content {
-          margin-left: 0;
+        .nav-item {
+          width: 100%;
+        }
+
+        .nav-link {
+          padding: 0.75rem 1.5rem;
+        }
+
+        .nav-link.active::after {
+          display: none;
+        }
+
+        .nav-link.active {
+          background-color: var(--gray-100);
         }
 
         .mobile-toggle {
           display: block;
         }
 
-        .sidebar-toggle {
-          display: block;
+        .user-info {
+          display: none;
         }
+      }
+
+      @media (max-width: 576px) {
+        .header-container,
+        .nav-container {
+          padding: 0 1rem;
+        }
+
+        .page-content {
+          padding: 1rem;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Estilo para indicar que o menu está ativo no mobile */
+      body.menu-active .nav-menu {
+        display: flex;
       }
     </style>
   </head>
   <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <a href="{{ url_for('admin.index') }}" class="sidebar-logo">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="{{ url_for('admin.index') }}" class="header-logo">
           <i class="fas fa-shield-alt"></i>
-          <span>Admin Panel</span>
+          <span>VigiaDF Admin</span>
         </a>
-        <button class="sidebar-toggle">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
 
-      <div class="sidebar-nav">
-        <div class="sidebar-heading">Principal</div>
-        <ul class="sidebar-menu">
-          <li class="sidebar-item">
-            <a
-              href="{{ url_for('admin.index') }}"
-              class="sidebar-link {% if request.endpoint == 'admin.index' %}active{% endif %}"
-            >
-              <i class="fas fa-tachometer-alt sidebar-icon"></i>
+        <div class="header-actions">
+          <button class="mobile-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          
+          <div class="user-menu">
+            <button class="user-button" id="userMenuButton">
+              <div class="user-avatar">A</div>
+              <div class="user-info">
+                <div class="user-name">Admin</div>
+                <div class="user-role">Administrador</div>
+              </div>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            
+            <div class="user-dropdown" id="userDropdown">
+              <div class="dropdown-divider"></div>
+              <a href="{{ url_for('auth.logout') }}" class="dropdown-item logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sair</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-container">
+        <ul class="nav-menu" id="navMenu">
+          <li class="nav-item">
+            <a href="{{ url_for('admin.index') }}" class="nav-link {% if request.endpoint == 'admin.index' %}active{% endif %}">
+              <i class="fas fa-tachometer-alt nav-icon"></i>
               <span>Dashboard</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a
-              href="#"
-              class="sidebar-link dropdown-toggle {% if request.endpoint and request.endpoint.startswith('admin.ocorrencias') %}active{% endif %}"
-            >
-              <i class="fas fa-exclamation-circle sidebar-icon"></i>
+          <li class="nav-item">
+            <a href="{{ url_for('admin.index') }}" class="nav-link {% if request.endpoint == 'admin.issues' %}active{% endif %}">
+              <i class="fas fa-exclamation-circle nav-icon"></i>
               <span>Ocorrências</span>
             </a>
-            <div
-              class="sidebar-dropdown {% if request.endpoint and request.endpoint.startswith('admin.ocorrencias') %}open{% endif %}"
-            >
-              <a href="{{ url_for('admin.index') }}" class="sidebar-link"
-                >Todas</a
-              >
-              <a href="{{ url_for('admin.index') }}" class="sidebar-link"
-                >Pendentes</a
-              >
-              <a href="{{ url_for('admin.index') }}" class="sidebar-link"
-                >Em processamento</a
-              >
-              <a href="{{ url_for('admin.index') }}" class="sidebar-link"
-                >Resolvidas</a
-              >
-            </div>
           </li>
-        </ul>
-
-        <div class="sidebar-heading">Administração</div>
-        <ul class="sidebar-menu">
-          <li class="sidebar-item">
-            <a
-              href="{{ url_for('admin.index') }}"
-              class="sidebar-link {% if request.endpoint == 'admin.users' %}active{% endif %}"
-            >
-              <i class="fas fa-users sidebar-icon"></i>
+          <li class="nav-item">
+            <a href="{{ url_for('admin.index') }}" class="nav-link {% if request.endpoint == 'admin.users' %}active{% endif %}">
+              <i class="fas fa-users nav-icon"></i>
               <span>Usuários</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a
-              href="{{ url_for('admin.index') }}"
-              class="sidebar-link {% if request.endpoint == 'admin.companies' %}active{% endif %}"
-            >
-              <i class="fas fa-building sidebar-icon"></i>
-              <span>Empresas</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a
-              href="{{ url_for('admin.index') }}"
-              class="sidebar-link {% if request.endpoint == 'admin.categories' %}active{% endif %}"
-            >
-              <i class="fas fa-tags sidebar-icon"></i>
-              <span>Categorias</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a
-              href="{{ url_for('admin.index') }}"
-              class="sidebar-link {% if request.endpoint == 'admin.settings' %}active{% endif %}"
-            >
-              <i class="fas fa-cog sidebar-icon"></i>
-              <span>Configurações</span>
-            </a>
-          </li>
-        </ul>
-
-        <div class="sidebar-heading">Relatórios</div>
-        <ul class="sidebar-menu">
-          <li class="sidebar-item">
-            <a
-              href="{{ url_for('admin.index') }}"
-              class="sidebar-link {% if request.endpoint == 'admin.statistics' %}active{% endif %}"
-            >
-              <i class="fas fa-chart-bar sidebar-icon"></i>
+          <li class="nav-item">
+            <a href="#" class="nav-link disabled">
+              <i class="fas fa-chart-bar nav-icon"></i>
               <span>Estatísticas</span>
+              <span class="soon-badge">Em breve</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a
-              href="{{ url_for('admin.index') }}"
-              class="sidebar-link {% if request.endpoint == 'admin.analytics' %}active{% endif %}"
-            >
-              <i class="fas fa-chart-line sidebar-icon"></i>
-              <span>Analytics</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a
-              href="{{ url_for('admin.index') }}"
-              class="sidebar-link {% if request.endpoint == 'admin.exports' %}active{% endif %}"
-            >
-              <i class="fas fa-file-export sidebar-icon"></i>
+          <li class="nav-item">
+            <a href="#" class="nav-link disabled">
+              <i class="fas fa-file-export nav-icon"></i>
               <span>Exportar Dados</span>
+              <span class="soon-badge">Em breve</span>
             </a>
           </li>
         </ul>
       </div>
-    </aside>
+    </nav>
 
     <!-- Main Content -->
-    <div class="main-content">
-      <header class="header">
-        <button class="mobile-toggle">
-          <i class="fas fa-bars"></i>
-        </button>
-
-        <div class="header-right">
-          <div class="header-search">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Buscar..." />
-          </div>
-
-          <div class="header-notification">
-            <i class="fas fa-bell"></i>
-            <span class="notification-badge">3</span>
-          </div>
-
-          <div class="header-user">
-            <div class="user-avatar">A</div>
-            <div class="user-info">
-              <div class="user-name">Admin</div>
-              <div class="user-role">Administrador</div>
-            </div>
-          </div>
-        </div>
-      </header>
-
+    <main class="main-content">
       <div class="page-content">
-        {% with messages = get_flashed_messages(with_categories=true) %} {% if
-        messages %} {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
-          <div class="alert-icon">
-            {% if category == 'success' %}
-            <i class="fas fa-check-circle"></i>
-            {% elif category == 'danger' %}
-            <i class="fas fa-exclamation-circle"></i>
-            {% elif category == 'warning' %}
-            <i class="fas fa-exclamation-triangle"></i>
-            {% elif category == 'info' %}
-            <i class="fas fa-info-circle"></i>
-            {% endif %}
-          </div>
-          <div class="alert-content">
-            <div class="alert-message">{{ message }}</div>
-          </div>
-        </div>
-        {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
+        {% with messages = get_flashed_messages(with_categories=true) %} 
+          {% if messages %} 
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                <div class="alert-icon">
+                  {% if category == 'success' %}
+                    <i class="fas fa-check-circle"></i>
+                  {% elif category == 'danger' %}
+                    <i class="fas fa-exclamation-circle"></i>
+                  {% elif category == 'warning' %}
+                    <i class="fas fa-exclamation-triangle"></i>
+                  {% elif category == 'info' %}
+                    <i class="fas fa-info-circle"></i>
+                  {% endif %}
+                </div>
+                <div class="alert-content">
+                  <div class="alert-message">{{ message }}</div>
+                </div>
+              </div>
+            {% endfor %} 
+          {% endif %} 
+        {% endwith %} 
+        
+        {% block content %}{% endblock %}
       </div>
-    </div>
+    </main>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Mobile sidebar toggle
-        const mobileToggle = document.querySelector(".mobile-toggle");
-        const sidebar = document.querySelector(".sidebar");
-
-        if (mobileToggle) {
-          mobileToggle.addEventListener("click", function () {
-            sidebar.classList.toggle("active");
+        // Toggle mobile menu
+        const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+        const navMenu = document.getElementById("navMenu");
+        
+        if (mobileMenuToggle) {
+          mobileMenuToggle.addEventListener("click", function() {
+            navMenu.classList.toggle("active");
+            document.body.classList.toggle("menu-active");
           });
         }
-
-        // Sidebar close button
-        const sidebarToggle = document.querySelector(".sidebar-toggle");
-
-        if (sidebarToggle) {
-          sidebarToggle.addEventListener("click", function () {
-            sidebar.classList.remove("active");
+        
+        // User dropdown menu
+        const userMenuButton = document.getElementById("userMenuButton");
+        const userDropdown = document.getElementById("userDropdown");
+        
+        if (userMenuButton && userDropdown) {
+          userMenuButton.addEventListener("click", function() {
+            userDropdown.classList.toggle("active");
+          });
+          
+          // Close dropdown when clicking outside
+          document.addEventListener("click", function(event) {
+            if (!userMenuButton.contains(event.target) && !userDropdown.contains(event.target)) {
+              userDropdown.classList.remove("active");
+            }
           });
         }
-
-        // Dropdown menus
-        const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
-
-        dropdownToggles.forEach(function (toggle) {
-          toggle.addEventListener("click", function (e) {
+        
+        // Handle disabled links
+        const disabledLinks = document.querySelectorAll(".nav-link.disabled");
+        disabledLinks.forEach(function(link) {
+          link.addEventListener("click", function(e) {
             e.preventDefault();
-
-            const dropdown = this.nextElementSibling;
-
-            // Toggle current dropdown
-            this.classList.toggle("active");
-
-            // Close other dropdowns
-            dropdownToggles.forEach(function (otherToggle) {
-              if (otherToggle !== toggle) {
-                otherToggle.classList.remove("active");
-
-                if (otherToggle.nextElementSibling) {
-                  otherToggle.nextElementSibling.classList.remove("open");
-                }
-              }
-            });
-
-            dropdown.classList.toggle("open");
           });
         });
       });
