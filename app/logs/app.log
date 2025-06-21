@@ -597,3 +597,4 @@ OPENAPI_API_KEY
 2025-06-21 12:13:04,711 [INFO] - Ocorrência CDF-2506-0018 salva com sucesso no banco de dados
 2025-06-21 12:13:04,712 [INFO] - Histórico salvo em: app/integrations/organização_history.json
 2025-06-21 12:13:04,727 [INFO] - Encontradas 9 ocorrências para o usuário 4
+2025-06-21 12:20:14,569 [INFO] - Encontradas 6 ocorrências para o usuário 1
