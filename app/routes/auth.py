@@ -66,4 +66,4 @@ def logout():
     session.pop('username', None)
     flash('Você foi desconectado.', 'info')
     
-    return redirect(url_for('auth.index'))
+    return redirect(url_for('main.index'))

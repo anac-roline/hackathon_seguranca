@@ -160,6 +160,7 @@ OPENAPI_API_KEY
 2025-06-20 20:26:26,226 [INFO] - Encontradas 1 ocorrências para o usuário 1
 2025-06-20 20:27:16,789 [INFO] - Encontradas 1 ocorrências para o usuário 1
 2025-06-20 20:44:00,881 [INFO] - Encontradas 1 ocorrências para o usuário 1
+<<<<<<< HEAD
 2025-06-20 21:08:22,343 [INFO] - Encontradas 1 ocorrências para o usuário 1
 2025-06-20 21:09:36,581 [INFO] - Encontradas 1 ocorrências para o usuário 1
 2025-06-20 21:09:37,331 [INFO] - Encontradas 1 ocorrências para o usuário 1
@@ -193,3 +194,8 @@ OPENAPI_API_KEY
 2025-06-20 21:16:29,029 [INFO] - Encontradas 0 ocorrências para o usuário 1
 2025-06-20 21:27:46,767 [INFO] - Encontradas 0 ocorrências para o usuário 2
 2025-06-20 21:29:17,543 [INFO] - Encontradas 0 ocorrências para o usuário 1
+=======
+2025-06-20 21:09:29,072 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 21:10:30,623 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 21:13:01,862 [INFO] - Encontradas 1 ocorrências para o usuário 1
+>>>>>>> 4099700ba213b5d67bd2144036728fdfab6315c1
