@@ -2,6 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 import os
+# from app.commands import create_admin
+
 
 # Inicializa a extensão
 db = SQLAlchemy()
@@ -26,3 +28,5 @@ app.static_folder = os.path.join(os.path.dirname(__file__), 'static')
 # Cria o banco de dados e as tabelas se não existirem
 with app.app_context():
     db.create_all()
+
+    # create_admin(db)

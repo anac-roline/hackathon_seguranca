@@ -160,3 +160,42 @@ OPENAPI_API_KEY
 2025-06-20 20:26:26,226 [INFO] - Encontradas 1 ocorrências para o usuário 1
 2025-06-20 20:27:16,789 [INFO] - Encontradas 1 ocorrências para o usuário 1
 2025-06-20 20:44:00,881 [INFO] - Encontradas 1 ocorrências para o usuário 1
+<<<<<<< HEAD
+2025-06-20 21:08:22,343 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 21:09:36,581 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 21:09:37,331 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 21:09:39,731 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 21:10:33,766 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 21:11:45,630 [INFO] - Encontradas 0 ocorrências para o usuário 2
+2025-06-20 21:12:17,375 [INFO] - Iniciando processamento de nova ocorrência para usuário 2
+2025-06-20 21:12:17,379 [INFO] - Código gerado: CDF-2506-0002
+2025-06-20 21:12:17,380 [INFO] - Processando foto: TCL.jpg
+2025-06-20 21:12:17,381 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0002.jpg
+2025-06-20 21:12:17,382 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0002
+2025-06-20 21:12:17,383 [ERROR] - Falha na análise de imagem: 1 validation error for Settings
+OPENAPI_API_KEY
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-06-20 21:12:17,400 [INFO] - Ocorrência CDF-2506-0002 salva com sucesso no banco de dados
+2025-06-20 21:12:17,412 [INFO] - Encontradas 1 ocorrências para o usuário 2
+2025-06-20 21:13:23,388 [INFO] - Iniciando processamento de nova ocorrência para usuário 2
+2025-06-20 21:13:23,393 [INFO] - Código gerado: CDF-2506-0003
+2025-06-20 21:13:23,394 [INFO] - Processando foto: Cmat.jpg
+2025-06-20 21:13:23,394 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0003.jpg
+2025-06-20 21:13:23,394 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0003
+2025-06-20 21:13:23,395 [ERROR] - Falha na análise de imagem: 1 validation error for Settings
+OPENAPI_API_KEY
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_type
+2025-06-20 21:13:23,416 [INFO] - Ocorrência CDF-2506-0003 salva com sucesso no banco de dados
+2025-06-20 21:13:23,428 [INFO] - Encontradas 2 ocorrências para o usuário 2
+2025-06-20 21:13:59,052 [INFO] - Encontradas 2 ocorrências para o usuário 2
+2025-06-20 21:14:00,678 [INFO] - Encontradas 2 ocorrências para o usuário 2
+2025-06-20 21:16:29,029 [INFO] - Encontradas 0 ocorrências para o usuário 1
+2025-06-20 21:27:46,767 [INFO] - Encontradas 0 ocorrências para o usuário 2
+2025-06-20 21:29:17,543 [INFO] - Encontradas 0 ocorrências para o usuário 1
+=======
+2025-06-20 21:09:29,072 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 21:10:30,623 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-20 21:13:01,862 [INFO] - Encontradas 1 ocorrências para o usuário 1
+>>>>>>> 4099700ba213b5d67bd2144036728fdfab6315c1
