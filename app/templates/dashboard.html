@@ -35,9 +35,9 @@ content %}
     <div class="stat-label">Em Andamento</div>
   </div>
   <div class="stat-card">
-    <i class="fas fa-thumbs-up stat-icon"></i>
-    <div class="stat-value">{{stats.get("impacto_social", 0)}}</div>
-    <div class="stat-label">Impacto Social</div>
+    <i class="fas fa-exclamation-triangle stat-icon"></i>
+    <div class="stat-value">{{stats.get("revisao", 0)}}</div>
+    <div class="stat-label">Revisão</div>
   </div>
 </div>
 
@@ -100,8 +100,8 @@ content %}
           <div class="notification-title">Categorias Mais Reportadas</div>
           <div class="region-stat-value">
             <span>1. Buracos em vias</span>
-          <span>2. Iluminação pública</span>
-          <span>3. Lixo acumulado</span>
+            <span>2. Iluminação pública</span>
+            <span>3. Lixo acumulado</span>
           </div>
         </div>
       </div>
@@ -166,6 +166,14 @@ content %}
             <div class="detail-value">
               {{ issue.created_at.strftime('%d/%m/%Y %H:%M') }}
             </div>
+          </div>
+          <div class="issue-detail-row">
+            <div class="detail-label">Encaminhado para:</div>
+            <div class="detail-value"> {{ issue.companie }} </div>
+          </div>
+          <div class="issue-detail-row">
+            <div class="detail-label">Análise IA:</div>
+            <div class="detail-value">{{ issue.ai_validation_result.get('analysis', '') }}</div>
           </div>
 
           {% if issue.photo_filename %}
@@ -518,7 +526,7 @@ content %}
     color: var(--gray-700);
   }
 
-  .status-em_analise {
+  .status-analise {
     background-color: #fff8e1;
     color: #f57f17;
   }
