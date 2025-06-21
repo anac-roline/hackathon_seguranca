@@ -314,7 +314,8 @@ block content %}
     const longitudeInput = document.getElementById("longitude");
     const locationBtn = document.getElementById("getCurrentLocation");
     const statusText = document.getElementById("locationStatus");
-    const photoInput = document.getElementById("photoInput");
+    const fileInput = document.getElementById("fileInput");
+    const cameraInput = document.getElementById("cameraInput");
     const photoPreview = document.getElementById("photoPreview");
     const takeCameraBtn = document.getElementById("takeCameraPhoto");
 
@@ -417,24 +418,31 @@ block content %}
       }
     });
 
-    // Exibir prévia da foto
-    photoInput.addEventListener("change", function (e) {
-      if (this.files && this.files[0]) {
+    // Função para exibir prévia da foto
+    function handleFilePreview(fileInputElement) {
+      if (fileInputElement.files && fileInputElement.files[0]) {
         const reader = new FileReader();
         reader.onload = function (e) {
           photoPreview.src = e.target.result;
           photoPreview.style.display = "block";
         };
-        reader.readAsDataURL(this.files[0]);
+        reader.readAsDataURL(fileInputElement.files[0]);
       }
+    }
+
+    // Exibir prévia quando o arquivo é selecionado da galeria
+    fileInput.addEventListener("change", function() {
+      handleFilePreview(this);
+    });
+
+    // Exibir prévia quando a foto é tirada com a câmera
+    cameraInput.addEventListener("change", function() {
+      handleFilePreview(this);
     });
 
     // Botão para tirar foto com a câmera
     takeCameraBtn.addEventListener("click", function () {
-      if (photoInput) {
-        photoInput.setAttribute("capture", "environment");
-        photoInput.click();
-      }
+      cameraInput.click();
     });
 
     // Validação do formulário antes de enviar
@@ -446,36 +454,21 @@ block content %}
           alert("Por favor, defina a localização do problema no mapa.");
           return false;
         }
-      });
-  });
-
-  const fileInput = document.getElementById("fileInput");
-  const cameraInput = document.getElementById("cameraInput");
-
-  // Botão câmera
-  takeCameraBtn.addEventListener("click", function () {
-    cameraInput.click();
-  });
-
-  // Preview para ambos inputs
-  [fileInput, cameraInput].forEach((input) => {
-    input.addEventListener("change", function (e) {
-      if (this.files && this.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          photoPreview.src = e.target.result;
-          photoPreview.style.display = "block";
-        };
-        reader.readAsDataURL(this.files[0]);
-
-        // Sincroniza o arquivo para o outro input
-        if (this === fileInput) {
-          cameraInput.files = this.files;
-        } else {
-          fileInput.files = this.files;
+        
+        // Garantir que pelo menos um dos inputs tenha um arquivo
+        if (fileInput.files.length === 0 && cameraInput.files.length === 0) {
+          e.preventDefault();
+          alert("Por favor, adicione uma foto do problema.");
+          return false;
         }
-      }
-    });
+        
+        // Se apenas o cameraInput tiver arquivo, copie para o fileInput que tem o atributo 'name'
+        if (fileInput.files.length === 0 && cameraInput.files.length > 0) {
+          // Não podemos simplesmente atribuir files diretamente por segurança do navegador
+          // Em vez disso, enviamos o formulário com o cameraInput tendo o atributo 'name'
+          cameraInput.name = "photo";
+        }
+      });
   });
 </script>
 {% endblock %}
