@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for,
 from datetime import datetime, timedelta
 from sqlalchemy import func, desc, and_, cast, Date
 from sqlalchemy.sql import label
-import json
+import math
 
 from app import db
 from app.models.user import User
@@ -345,6 +345,47 @@ def get_recent_reports(limit=10):
     
     return jsonify(analytics_data)
 
+# Classe auxiliar para paginação
+class Pagination:
+    def __init__(self, page, per_page, total_count):
+        self.page = page
+        self.per_page = per_page
+        self.total_count = total_count
+        self.pages = int(math.ceil(total_count / float(per_page)))
+        
+    @property
+    def total_items(self):
+        return self.total_count
+        
+    @property
+    def has_prev(self):
+        return self.page > 1
+        
+    @property
+    def has_next(self):
+        return self.page < self.pages
+        
+    @property
+    def start_index(self):
+        return (self.page - 1) * self.per_page + 1
+        
+    @property
+    def end_index(self):
+        end = self.page * self.per_page
+        return min(end, self.total_count)
+        
+    def iter_pages(self, left_edge=2, left_current=2, right_current=3, right_edge=2):
+        last = 0
+        for num in range(1, self.pages + 1):
+            if (num <= left_edge or
+                (num > self.page - left_current - 1 and
+                 num < self.page + right_current) or
+                num > self.pages - right_edge):
+                if last + 1 != num:
+                    yield None
+                yield num
+                last = num
+
 # Rota para mostrar detalhes de uma ocorrência específica
 @admin_bp.route('/issue/<issue_code>')
 def issue_detail(issue_code):
@@ -591,3 +632,170 @@ def filter_analytics():
     )
     
     return jsonify(analytics_data)
+
+# Rota para listar todas as ocorrências
+@admin_bp.route('/issues')
+def issues():
+    # Obter parâmetros da query string
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 20, type=int)
+    status = request.args.get('status', 'all')
+    category_id = request.args.get('category', 'all')
+    company = request.args.get('company', 'all')
+    date_from = request.args.get('date_from')
+    date_to = request.args.get('date_to')
+    search = request.args.get('search', '')
+    sort = request.args.get('sort', 'date')
+    order = request.args.get('order', 'desc')
+    
+    # Construir a query base
+    query = Issue.query
+    
+    # Aplicar filtros
+    if status != 'all':
+        query = query.filter(Issue.status == status)
+        
+    if category_id != 'all':
+        try:
+            query = query.filter(Issue.category_id == int(category_id))
+        except ValueError:
+            pass
+            
+    if company == 'unassigned':
+        query = query.filter(Issue.companie == None)
+    elif company != 'all':
+        query = query.filter(Issue.companie == company)
+        
+    if date_from:
+        try:
+            from_date = datetime.strptime(date_from, '%Y-%m-%d')
+            query = query.filter(Issue.created_at >= from_date)
+        except ValueError:
+            pass
+            
+    if date_to:
+        try:
+            to_date = datetime.strptime(date_to, '%Y-%m-%d')
+            to_date = to_date.replace(hour=23, minute=59, second=59)
+            query = query.filter(Issue.created_at <= to_date)
+        except ValueError:
+            pass
+            
+    if search:
+        search_term = f"%{search}%"
+        query = query.filter(
+            # Busca por código da ocorrência ou descrição
+            db.or_(
+                Issue.issue_code.like(search_term),
+                Issue.description.like(search_term)
+            )
+        )
+    
+    # Aplicar ordenação
+    if sort == 'date':
+        query = query.order_by(desc(Issue.created_at) if order == 'desc' else Issue.created_at)
+    elif sort == 'status':
+        query = query.order_by(Issue.status)
+    elif sort == 'company':
+        query = query.order_by(Issue.companie)
+    elif sort == 'category':
+        query = query.order_by(Issue.category_id)
+    else:
+        # Ordenação padrão: data decrescente (mais recentes primeiro)
+        query = query.order_by(desc(Issue.created_at))
+    
+    # Contar o total de itens (para paginação)
+    total_count = query.count()
+    
+    # Paginar os resultados
+    issues = query.paginate(page=page, per_page=per_page, error_out=False).items
+    
+    # Criar objeto de paginação personalizado
+    pagination = Pagination(page, per_page, total_count)
+    
+    # Estatísticas rápidas
+    stats = {
+        'total': Issue.query.count(),
+        'pending': Issue.query.filter(Issue.status == 'pendente').count(),
+        'processing': Issue.query.filter(Issue.status.in_(['em_analise', 'em_processamento'])).count(),
+        'resolved': Issue.query.filter(Issue.status == 'resolvido').count()
+    }
+    
+    # Obter lista de categorias
+    categories = [
+        {"id": cat["id"], "name": cat["name"]} for cat in CATEGORIES
+    ]
+    
+    # Obter lista de empresas/órgãos
+    companies = [
+        {"id": company["id"], "name": company["name"]} for company in COMPANIES
+    ]
+    
+    return render_template(
+        'admin/issues.html',
+        issues=issues,
+        pagination=pagination,
+        stats=stats,
+        categories=categories,
+        companies=companies,
+        get_category_name=get_category_name
+    )
+
+# Rota para atualização rápida de status via AJAX
+@admin_bp.route('/issues/update-status', methods=['POST'])
+def update_issue_status_ajax():
+    issue_id = request.form.get('issue_id')
+    status = request.form.get('status')
+    company = request.form.get('company')
+    observation = request.form.get('observation')
+    
+    if not issue_id or not status:
+        return jsonify({
+            'success': False,
+            'message': 'ID da ocorrência e status são obrigatórios'
+        })
+    
+    try:
+        issue = Issue.query.get(issue_id)
+        if not issue:
+            return jsonify({
+                'success': False,
+                'message': 'Ocorrência não encontrada'
+            })
+        
+        # Atualizar o status
+        issue.status = status
+        
+        # Atualizar a empresa se fornecida
+        if company:
+            issue.companie = company
+        
+        # Registrar a observação (se você tiver um modelo para isso)
+        # Se você tiver um modelo para histórico de atualizações, seria algo como:
+        # if observation:
+        #     history = IssueHistory(
+        #         issue_id=issue.id,
+        #         user_id=current_user.id,
+        #         action='status_update',
+        #         old_status=old_status,
+        #         new_status=status,
+        #         observation=observation
+        #     )
+        #     db.session.add(history)
+        
+        # Atualizar timestamp
+        issue.updated_at = datetime.now()
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Status atualizado com sucesso'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'success': False,
+            'message': f'Erro ao atualizar status: {str(e)}'
+        })
