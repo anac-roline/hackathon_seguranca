@@ -276,3 +276,14 @@ def review_image(issue_code):
         return redirect(url_for('admin.review_queue'))
     
     return render_template('admin/review_image.html', issue=issue)
+
+
+# Adicione estas rotas para servir o manifest e o service worker com os tipos MIME corretos
+@app.route('/static/manifest.json')
+def serve_manifest():
+    return app.send_static_file('manifest.json'), {'Content-Type': 'application/manifest+json'}
+
+@app.route('/static/js/sw.js')
+def serve_service_worker():
+    return app.send_static_file('js/sw.js'), {'Content-Type': 'application/javascript'}
+

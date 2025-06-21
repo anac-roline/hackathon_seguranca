@@ -76,7 +76,7 @@
             <option value="all" {% if not request.args.get('status') or request.args.get('status') == 'all' %}selected{% endif %}>Todos</option>
             <option value="pendente" {% if request.args.get('status') == 'pendente' %}selected{% endif %}>Pendentes</option>
             <option value="analise" {% if request.args.get('status') == 'analise' %}selected{% endif %}>Em Análise</option>
-            <option value="em_processamento" {% if request.args.get('status') == 'em_processamento' %}selected{% endif %}>Em Processamento</option>
+            <option value="processamento" {% if request.args.get('status') == 'processamento' %}selected{% endif %}>Em Processamento</option>
             <option value="resolvido" {% if request.args.get('status') == 'resolvido' %}selected{% endif %}>Resolvidas</option>
             <option value="cancelado" {% if request.args.get('status') == 'cancelado' %}selected{% endif %}>Canceladas</option>
           </select>
@@ -204,7 +204,7 @@
                 <i class="fas fa-clock"></i> Pendente 
                 {% elif issue.status == 'analise' %}
                 <i class="fas fa-search"></i> Em Análise
-                {% elif issue.status == 'em_processamento' %}
+                {% elif issue.status == 'processamento' %}
                 <i class="fas fa-cog"></i> Em Processamento 
                 {% elif issue.status == 'resolvido' %}
                 <i class="fas fa-check-circle"></i> Resolvido 
@@ -304,7 +304,7 @@
           <select name="status" class="form-select">
             <option value="pendente">Pendente</option>
             <option value="analise">Em Análise</option>
-            <option value="em_processamento">Em Processamento</option>
+            <option value="processamento">Em Processamento</option>
             <option value="resolvido">Resolvido</option>
             <option value="cancelado">Cancelado</option>
           </select>
@@ -406,7 +406,7 @@
   }
   
   .status-pill.analise,
-  .status-pill.em_processamento {
+  .status-pill.processamento {
     background-color: rgba(14, 165, 233, 0.1);
     color: var(--info);
   }
