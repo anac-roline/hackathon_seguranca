@@ -8,7 +8,7 @@ content %}
 
 <div class="dashboard-header">
   <div class="dashboard-welcome">
-    <h1>Olá, <span>{{ session['username'] }}</span></h1>
+    <h1>Olá, <span>{{ request.cookies.get('username', None) }}</span></h1>
     <p>Bem-vindo ao seu painel de controle no CidadeFiscal</p>
   </div>
   <div class="dashboard-actions">

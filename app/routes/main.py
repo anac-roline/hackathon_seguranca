@@ -48,7 +48,8 @@ def index():
 @main_bp.route('/dashboard')
 def dashboard():
     """Painel de controle, acessível apenas para usuários logados."""
-    if 'user_id' not in session:
+    user_id = request.cookies.get('id', None)
+    if user_id is None:
         flash('Você precisa estar logado para acessar esta página.', 'error')
         return redirect(url_for('auth.login'))
     
@@ -65,7 +66,7 @@ def dashboard():
     
     try:
         # Buscar as ocorrências do usuário atual
-        issues = Issue.query.filter_by(user_id=session['user_id']).order_by(Issue.created_at.desc()).all()
+        issues = Issue.query.filter_by(user_id=request.cookies.get('id', None)).order_by(Issue.created_at.desc()).all()
         
         # Preparar dados para o mapa (serializar)
         issues_json = []
@@ -82,7 +83,7 @@ def dashboard():
                 'mensagem': issue.ai_validation_result,
             })
         
-        log.info(f"Encontradas {len(issues)} ocorrências para o usuário {session['user_id']}")
+        log.info(f"Encontradas {len(issues)} ocorrências para o usuário {request.cookies.get('id', None)}")
     except Exception as e:
         log.error(f"Erro ao buscar ocorrências: {str(e)}")
         issues = []
@@ -101,14 +102,15 @@ def dashboard():
 @main_bp.route('/report_issue', methods=['GET', 'POST'])
 def report_issue():
     """Página para reportar uma nova ocorrência."""
-    if 'user_id' not in session:
+    user_id = request.cookies.get('id', None)
+    if user_id is None:
         flash('Você precisa estar logado para acessar esta página.', 'error')
         return redirect(url_for('auth.login'))
     
     if request.method == 'POST':
         try:
             # Registrar início do processamento
-            log.info(f"Iniciando processamento de nova ocorrência para usuário {session['user_id']}")
+            log.info(f"Iniciando processamento de nova ocorrência para usuário {request.cookies.get('id', None)}")
             
             # Extrair dados do formulário
             description = request.form.get('description')
@@ -178,7 +180,7 @@ def report_issue():
             # Criar nova ocorrência
             new_issue = Issue(
                 issue_code=issue_code,
-                user_id=session['user_id'],
+                user_id=request.cookies.get('id', None),
                 category_id=category_id,
                 description=description,
                 latitude=float(latitude),
@@ -236,7 +238,8 @@ def report_issue():
 @main_bp.route('/view_issues')
 def view_issues():
     """Página para visualizar ocorrências reportadas."""
-    if 'user_id' not in session:
+    user_id = request.cookies.get('id', None)
+    if user_id is None:
         flash('Você precisa estar logado para acessar esta página.', 'error')
         return redirect(url_for('auth.login'))
 

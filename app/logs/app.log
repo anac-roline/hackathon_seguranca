@@ -313,3 +313,35 @@ OPENAPI_API_KEY
 2025-06-21 00:50:49,198 [WARNING] - Ocorrência CDF-2506-0007 marcada para revisão humana
 2025-06-21 00:50:49,204 [INFO] - Ocorrência CDF-2506-0007 salva com sucesso no banco de dados
 2025-06-21 00:50:49,215 [INFO] - Encontradas 6 ocorrências para o usuário 1
+2025-06-21 04:30:08,462 [ERROR] - Erro ao buscar ocorrências: 'user_id'
+2025-06-21 04:32:26,180 [ERROR] - Erro ao processar ocorrência: 'user_id'
+2025-06-21 04:35:12,131 [INFO] - Encontradas 0 ocorrências para o usuário 1
+2025-06-21 04:35:25,889 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-21 04:35:25,894 [INFO] - Código gerado: CDF-2506-0001
+2025-06-21 04:35:25,895 [INFO] - Processando foto: TCL.jpg
+2025-06-21 04:35:25,896 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0001.jpg
+2025-06-21 04:35:25,898 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0001
+2025-06-21 04:35:25,968 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0001.jpg (categoria: 1)
+2025-06-21 04:35:25,968 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 04:35:29,834 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 04:35:29,834 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 0.9, "matches_description": false, "detected_elements": ["gr\u00e1ficos", "representa\u00e7\u00e3o estat\u00edstica"], "analysis": "A imagem apresenta gr\u00e1ficos estat\u00edsticos e uma distribui\u00e7\u00e3o, sem elementos de infraestrutura urbana.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 04:35:29,835 [INFO] - Análise de IA concluída para CDF-2506-0001: {"valid": false, "confidence": 0.9, "matches_description": false, "detected_elements": ["gr\u00e1ficos", "representa\u00e7\u00e3o estat\u00edstica"], "analysis": "A imagem apresenta gr\u00e1ficos estat\u00edsticos e uma distribui\u00e7\u00e3o, sem elementos de infraestrutura urbana.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 04:35:29,835 [WARNING] - Ocorrência CDF-2506-0001 marcada para revisão humana
+2025-06-21 04:35:29,854 [INFO] - Ocorrência CDF-2506-0001 salva com sucesso no banco de dados
+2025-06-21 04:35:29,870 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-21 04:39:17,529 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-21 04:39:22,199 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-21 04:39:23,566 [INFO] - Encontradas 1 ocorrências para o usuário 1
+2025-06-21 04:39:51,969 [INFO] - Iniciando processamento de nova ocorrência para usuário 1
+2025-06-21 04:39:51,972 [INFO] - Código gerado: CDF-2506-0002
+2025-06-21 04:39:51,973 [INFO] - Processando foto: TCL.jpg
+2025-06-21 04:39:51,973 [INFO] - Foto salva em: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0002.jpg
+2025-06-21 04:39:51,974 [INFO] - Iniciando análise de imagem para ocorrência CDF-2506-0002
+2025-06-21 04:39:51,999 [INFO] - Analisando imagem com API Vision: /home/guilherme/py_projects/hackathon_seguranca/app/static/uploads/issues/CDF-2506-0002.jpg (categoria: 1)
+2025-06-21 04:39:52,000 [DEBUG] - Enviando requisição para OpenAI API...
+2025-06-21 04:39:54,067 [INFO] - Resposta recebida da API Vision com sucesso
+2025-06-21 04:39:54,067 [INFO] - Análise da imagem concluída: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": [], "analysis": "A imagem mostra gr\u00e1ficos e diagramas, n\u00e3o uma via p\u00fablica.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 04:39:54,067 [INFO] - Análise de IA concluída para CDF-2506-0002: {"valid": false, "confidence": 1.0, "matches_description": false, "detected_elements": [], "analysis": "A imagem mostra gr\u00e1ficos e diagramas, n\u00e3o uma via p\u00fablica.", "needs_human_review": false, "category_id": 1, "threshold": 0.7, "needs_review": true}
+2025-06-21 04:39:54,068 [WARNING] - Ocorrência CDF-2506-0002 marcada para revisão humana
+2025-06-21 04:39:54,085 [INFO] - Ocorrência CDF-2506-0002 salva com sucesso no banco de dados
+2025-06-21 04:39:54,106 [INFO] - Encontradas 2 ocorrências para o usuário 1

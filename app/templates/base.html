@@ -23,7 +23,8 @@
                 VigiaDF
             </a>
             <ul>
-                {% if 'username' in session %}
+                
+                {% if request.cookies.get('id', None) %}
                     <li><a href="{{ url_for('main.dashboard') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
 {#                    <li><a href="{{ url_for('main.report_issue') }}"><i class="fas fa-exclamation-circle"></i> Reportar</a></li>#}
 {#                    <li><a href="{{ url_for('main.my_reports') }}"><i class="fas fa-list"></i> Minhas Ocorrências</a></li>#}
@@ -57,10 +58,10 @@
             <h1>Bem-vindo ao VigiaDF</h1>
             <p>Esta plataforma conecta cidadãos ao poder público para identificar e resolver problemas urbanos e rurais que afetam a segurança e qualidade de vida.</p>
 
-            {% if 'username' not in session %}
+            {% if request.cookies.get('id', None) %}
             <p>Faça <a href="{{ url_for('login') }}">login</a> ou <a href="{{ url_for('signup') }}">crie uma conta</a> para começar a reportar ocorrências.</p>
             {% else %}
-            <p>Você está logado como <strong>{{ session['username'] }}</strong>.</p>
+            <p>Você está logado como <strong>{{ request.cookies.get('username', None) }}</strong>.</p>
             <p>Acesse seu <a href="{{ url_for('dashboard') }}">dashboard</a> ou <a href="{{ url_for('report_issue') }}">reporte uma nova ocorrência</a>.</p>
             {% endif %}
         </div>

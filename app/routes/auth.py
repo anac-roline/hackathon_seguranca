@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from app.models.user import User
@@ -32,7 +32,6 @@ def signup():
 
     return render_template('signup.html')
 
-
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     """Página de login."""
@@ -47,13 +46,18 @@ def login():
         print(f"🪲 DEBUG | Verificando usuário - Usuário: {user}")
 
         # Verifica se o usuário existe e a senha está correta
+        # Verifica se o usuário existe e a senha está correta
         if user and check_password_hash(user.password_hash, password):
-            session['user_id'] = user.id
-            session['username'] = user.username
-            flash(f'Login bem-sucedido! Bem-vindo, {user.username}!', 'success')
-            return redirect(url_for('main.dashboard'))
+            
+            response = make_response(redirect(url_for('main.dashboard')))
+            response.set_cookie("username", str(user.username), max_age=60*60*24) # Expira em 1 dia
+            response.set_cookie("is_analista", str(user.is_analista), max_age=60*60*24)
+            response.set_cookie("id", str(user.id), max_age=60*60*24)
+            response.set_cookie("is_analista_int", str(user.is_analista), max_age=60*60*24)
+            return response
 
         flash('Credenciais inválidas. Verifique seu usuário e senha.', 'error')
+        # return redirect(url_for('auth.login'))
         return redirect(url_for('auth.login'))
 
     return render_template('login.html')
@@ -62,8 +66,14 @@ def login():
 @auth_bp.route('/logout')
 def logout():
     """Rota para fazer logout do usuário."""
-    session.pop('user_id', None)
-    session.pop('username', None)
-    flash('Você foi desconectado.', 'info')
+    # session.pop('user_id', None)
+    # session.pop('username', None)
+    response = make_response(redirect(url_for('auth.login')))
+    response.delete_cookie("username")
+    response.delete_cookie("is_analista")
+    response.delete_cookie("id")
+    response.delete_cookie("is_analista_int")
     
-    return redirect(url_for('main.index'))
+    flash('Você foi desconectado.', 'info')
+
+    return response
